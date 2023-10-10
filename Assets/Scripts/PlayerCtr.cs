@@ -24,7 +24,7 @@ public class PlayerCtr : MonoBehaviour
         jump = Input.GetKeyDown(KeyCode.W);
 
         if (jumpCount > 0 && moveSpeed > 0) {
-            moveSpeed -= 2 * Time.deltaTime;
+            moveSpeed -= 5 * Time.deltaTime;
             // horizontalInput += prevHorizontal;
         }
         transform.Translate(Vector3.right * horizontalInput * moveSpeed * Time.deltaTime);
