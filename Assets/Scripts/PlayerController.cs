@@ -34,6 +34,11 @@ public class PlayerController : MonoBehaviour
     {
        // Vector2 door_position = GameObject.Find("Door").transform.position;
         GameObject.Find("Door").transform.position = new Vector2(8,1);
+        if (col.gameObject.CompareTag("Key"))
+        {
+            Debug.Log("Player has collider with key");
+            Destroy(col.gameObject);
+        }
 
     }
 }
