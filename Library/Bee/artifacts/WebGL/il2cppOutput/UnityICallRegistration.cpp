@@ -118,10 +118,6 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Application_get_isPlaying();
 		Register_UnityEngine_Application_get_isPlaying();
 
-		//System.Void UnityEngine.Application::Quit(System.Int32)
-		void Register_UnityEngine_Application_Quit();
-		Register_UnityEngine_Application_Quit();
-
 		//System.Void UnityEngine.Application::set_targetFrameRate(System.Int32)
 		void Register_UnityEngine_Application_set_targetFrameRate();
 		Register_UnityEngine_Application_set_targetFrameRate();
@@ -214,9 +210,17 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Camera_get_pixelRect_Injected();
 		Register_UnityEngine_Camera_get_pixelRect_Injected();
 
+		//System.Void UnityEngine.Camera::get_rect_Injected(UnityEngine.Rect&)
+		void Register_UnityEngine_Camera_get_rect_Injected();
+		Register_UnityEngine_Camera_get_rect_Injected();
+
 		//System.Void UnityEngine.Camera::set_orthographicSize(System.Single)
 		void Register_UnityEngine_Camera_set_orthographicSize();
 		Register_UnityEngine_Camera_set_orthographicSize();
+
+		//System.Void UnityEngine.Camera::set_rect_Injected(UnityEngine.Rect&)
+		void Register_UnityEngine_Camera_set_rect_Injected();
+		Register_UnityEngine_Camera_set_rect_Injected();
 
 		//UnityEngine.Camera UnityEngine.Camera::get_current()
 		void Register_UnityEngine_Camera_get_current();
@@ -483,6 +487,14 @@ void RegisterAllStrippedInternalCalls()
 		Register_UnityEngine_Collider_get_attachedRigidbody();
 
 	//End Registrations for type : UnityEngine.Collider
+
+	//Start Registrations for type : UnityEngine.Collider2D
+
+		//System.Void UnityEngine.Collider2D::get_bounds_Injected(UnityEngine.Bounds&)
+		void Register_UnityEngine_Collider2D_get_bounds_Injected();
+		Register_UnityEngine_Collider2D_get_bounds_Injected();
+
+	//End Registrations for type : UnityEngine.Collider2D
 
 	//Start Registrations for type : UnityEngine.Component
 
@@ -857,6 +869,10 @@ void RegisterAllStrippedInternalCalls()
 		//UnityEngine.GameObject UnityEngine.GameObject::Find(System.String)
 		void Register_UnityEngine_GameObject_Find();
 		Register_UnityEngine_GameObject_Find();
+
+		//UnityEngine.GameObject UnityEngine.GameObject::FindGameObjectWithTag(System.String)
+		void Register_UnityEngine_GameObject_FindGameObjectWithTag();
+		Register_UnityEngine_GameObject_FindGameObjectWithTag();
 
 		//UnityEngine.Transform UnityEngine.GameObject::get_transform()
 		void Register_UnityEngine_GameObject_get_transform();
@@ -1782,10 +1798,6 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Object_Internal_CloneSingle();
 		Register_UnityEngine_Object_Internal_CloneSingle();
 
-		//UnityEngine.Object[] UnityEngine.Object::FindObjectsOfType(System.Type,System.Boolean)
-		void Register_UnityEngine_Object_FindObjectsOfType();
-		Register_UnityEngine_Object_FindObjectsOfType();
-
 	//End Registrations for type : UnityEngine.Object
 
 	//Start Registrations for type : UnityEngine.ObjectGUIState
@@ -2280,35 +2292,15 @@ void RegisterAllStrippedInternalCalls()
 
 	//End Registrations for type : UnityEngine.Rigidbody2D
 
-	//Start Registrations for type : UnityEngine.SceneManagement.Scene
-
-		//System.String UnityEngine.SceneManagement.Scene::GetNameInternal(System.Int32)
-		void Register_UnityEngine_SceneManagement_Scene_GetNameInternal();
-		Register_UnityEngine_SceneManagement_Scene_GetNameInternal();
-
-	//End Registrations for type : UnityEngine.SceneManagement.Scene
-
 	//Start Registrations for type : UnityEngine.SceneManagement.SceneManager
-
-		//System.Boolean UnityEngine.SceneManagement.SceneManager::SetActiveScene_Injected(UnityEngine.SceneManagement.Scene&)
-		void Register_UnityEngine_SceneManagement_SceneManager_SetActiveScene_Injected();
-		Register_UnityEngine_SceneManagement_SceneManager_SetActiveScene_Injected();
 
 		//System.Int32 UnityEngine.SceneManagement.SceneManager::get_sceneCount()
 		void Register_UnityEngine_SceneManagement_SceneManager_get_sceneCount();
 		Register_UnityEngine_SceneManagement_SceneManager_get_sceneCount();
 
-		//System.Void UnityEngine.SceneManagement.SceneManager::GetActiveScene_Injected(UnityEngine.SceneManagement.Scene&)
-		void Register_UnityEngine_SceneManagement_SceneManager_GetActiveScene_Injected();
-		Register_UnityEngine_SceneManagement_SceneManager_GetActiveScene_Injected();
-
 		//System.Void UnityEngine.SceneManagement.SceneManager::GetSceneAt_Injected(System.Int32,UnityEngine.SceneManagement.Scene&)
 		void Register_UnityEngine_SceneManagement_SceneManager_GetSceneAt_Injected();
 		Register_UnityEngine_SceneManagement_SceneManager_GetSceneAt_Injected();
-
-		//System.Void UnityEngine.SceneManagement.SceneManager::GetSceneByName_Injected(System.String,UnityEngine.SceneManagement.Scene&)
-		void Register_UnityEngine_SceneManagement_SceneManager_GetSceneByName_Injected();
-		Register_UnityEngine_SceneManagement_SceneManager_GetSceneByName_Injected();
 
 	//End Registrations for type : UnityEngine.SceneManagement.SceneManager
 

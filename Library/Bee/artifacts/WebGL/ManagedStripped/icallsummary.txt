@@ -21,7 +21,6 @@ UnityEngine.Animator::SetTriggerString
 UnityEngine.Application::get_isBatchMode
 UnityEngine.Application::get_isFocused
 UnityEngine.Application::get_isPlaying
-UnityEngine.Application::Quit
 UnityEngine.Application::set_targetFrameRate
 UnityEngine.Application::get_platform
 UnityEngine.AsyncOperation::InternalDestroy
@@ -42,7 +41,9 @@ UnityEngine.Camera::SetupCurrent
 UnityEngine.Camera::ViewportToWorldPoint_Injected
 UnityEngine.Camera::WorldToScreenPoint_Injected
 UnityEngine.Camera::get_pixelRect_Injected
+UnityEngine.Camera::get_rect_Injected
 UnityEngine.Camera::set_orthographicSize
+UnityEngine.Camera::set_rect_Injected
 UnityEngine.Camera::get_current
 UnityEngine.Camera::get_main
 UnityEngine.Camera::get_clearFlags
@@ -104,6 +105,7 @@ UnityEngine.CanvasRenderer::set_materialCount
 UnityEngine.CanvasRenderer::set_popMaterialCount
 UnityEngine.CanvasRenderer::GetMaterial
 UnityEngine.Collider::get_attachedRigidbody
+UnityEngine.Collider2D::get_bounds_Injected
 UnityEngine.Component::GetComponentsForListInternal
 UnityEngine.Component::get_gameObject
 UnityEngine.Component::get_transform
@@ -182,6 +184,7 @@ UnityEngine.GameObject::GetComponentInParent
 UnityEngine.GameObject::Internal_AddComponentWithType
 UnityEngine.GameObject::TryGetComponentInternal
 UnityEngine.GameObject::Find
+UnityEngine.GameObject::FindGameObjectWithTag
 UnityEngine.GameObject::get_transform
 UnityEngine.GL::Begin
 UnityEngine.GL::End
@@ -393,7 +396,6 @@ UnityEngine.Object::set_hideFlags
 UnityEngine.Object::get_hideFlags
 UnityEngine.Object::FindObjectFromInstanceID
 UnityEngine.Object::Internal_CloneSingle
-UnityEngine.Object::FindObjectsOfType
 UnityEngine.ObjectGUIState::Internal_Create
 UnityEngine.ObjectGUIState::Internal_Destroy
 UnityEngine.Physics::get_defaultPhysicsScene_Injected
@@ -495,12 +497,8 @@ UnityEngine.Resources::GetBuiltinResource
 UnityEngine.ResourcesAPIInternal::Load
 UnityEngine.ResourcesAPIInternal::FindShaderByName
 UnityEngine.Rigidbody2D::AddForce_Injected
-UnityEngine.SceneManagement.Scene::GetNameInternal
-UnityEngine.SceneManagement.SceneManager::SetActiveScene_Injected
 UnityEngine.SceneManagement.SceneManager::get_sceneCount
-UnityEngine.SceneManagement.SceneManager::GetActiveScene_Injected
 UnityEngine.SceneManagement.SceneManager::GetSceneAt_Injected
-UnityEngine.SceneManagement.SceneManager::GetSceneByName_Injected
 UnityEngine.SceneManagement.SceneManagerAPIInternal::LoadSceneAsyncNameIndexInternal_Injected
 UnityEngine.Screen::get_fullScreen
 UnityEngine.Screen::get_height
