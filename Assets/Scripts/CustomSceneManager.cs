@@ -77,7 +77,8 @@ public class CustomSceneManager : MonoBehaviour
             sceneCam[boxScene[0]].rect = tmp;
             boxScene[0] = activeSceneIndex;
             boxScene[activeBoxIndex] = 3;
-            if (activeBoxIndex == playerBoxIndex) {
+            if (activeBoxIndex == playerBoxIndex)
+            {
                 playerBoxIndex = 0;
             }
             activeBoxIndex = 0;
@@ -89,7 +90,8 @@ public class CustomSceneManager : MonoBehaviour
             sceneCam[boxScene[2]].rect = tmp;
             boxScene[2] = activeSceneIndex;
             boxScene[activeBoxIndex] = 3;
-            if (activeBoxIndex == playerBoxIndex) {
+            if (activeBoxIndex == playerBoxIndex)
+            {
                 playerBoxIndex = 2;
             }
             activeBoxIndex = 2;
@@ -101,7 +103,8 @@ public class CustomSceneManager : MonoBehaviour
             sceneCam[boxScene[1]].rect = tmp;
             boxScene[1] = activeSceneIndex;
             boxScene[activeBoxIndex] = 3;
-            if (activeBoxIndex == playerBoxIndex) {
+            if (activeBoxIndex == playerBoxIndex)
+            {
                 playerBoxIndex = 1;
             }
             activeBoxIndex = 1;
@@ -113,7 +116,8 @@ public class CustomSceneManager : MonoBehaviour
             sceneCam[boxScene[3]].rect = tmp;
             boxScene[3] = activeSceneIndex;
             boxScene[activeBoxIndex] = 3;
-            if (activeBoxIndex == playerBoxIndex) {
+            if (activeBoxIndex == playerBoxIndex)
+            {
                 playerBoxIndex = 3;
             }
             activeBoxIndex = 3;
@@ -125,7 +129,8 @@ public class CustomSceneManager : MonoBehaviour
             sceneCam[boxScene[0]].rect = tmp;
             boxScene[0] = activeSceneIndex;
             boxScene[activeBoxIndex] = 3;
-            if (activeBoxIndex == playerBoxIndex) {
+            if (activeBoxIndex == playerBoxIndex)
+            {
                 playerBoxIndex = 0;
             }
             activeBoxIndex = 0;
@@ -137,7 +142,8 @@ public class CustomSceneManager : MonoBehaviour
             sceneCam[boxScene[1]].rect = tmp;
             boxScene[1] = activeSceneIndex;
             boxScene[activeBoxIndex] = 3;
-            if (activeBoxIndex == playerBoxIndex) {
+            if (activeBoxIndex == playerBoxIndex)
+            {
                 playerBoxIndex = 1;
             }
             activeBoxIndex = 1;
@@ -149,7 +155,8 @@ public class CustomSceneManager : MonoBehaviour
             sceneCam[boxScene[2]].rect = tmp;
             boxScene[2] = activeSceneIndex;
             boxScene[activeBoxIndex] = 3;
-            if (activeBoxIndex == playerBoxIndex) {
+            if (activeBoxIndex == playerBoxIndex)
+            {
                 playerBoxIndex = 2;
             }
             activeBoxIndex = 2;
@@ -161,7 +168,8 @@ public class CustomSceneManager : MonoBehaviour
             sceneCam[boxScene[3]].rect = tmp;
             boxScene[3] = activeSceneIndex;
             boxScene[activeBoxIndex] = 3;
-            if (activeBoxIndex == playerBoxIndex) {
+            if (activeBoxIndex == playerBoxIndex)
+            {
                 playerBoxIndex = 3;
             }
             activeBoxIndex = 3;
@@ -175,7 +183,7 @@ public class CustomSceneManager : MonoBehaviour
         float playerX = player.transform.position.x;
         float playerW = playerCollider.bounds.size.x / 2;
         Vector3 curRelativePos = scenes[playerIndex].transform.position - player.transform.position;
-        
+
         curSceneCollider = scenes[playerIndex].GetComponent<BoxCollider2D>();
         float sceneX = scenes[playerIndex].transform.position.x;
         float sceneW = curSceneCollider.bounds.size.x / 2;
@@ -186,8 +194,10 @@ public class CustomSceneManager : MonoBehaviour
         //     }
         // }
 
-        if (playerX - playerW > sceneX + sceneW) {
-            if (playerBoxIndex == 0 && boxScene[1] != 3) {
+        if (playerX - playerW > sceneX + sceneW)
+        {
+            if (playerBoxIndex == 0 && boxScene[1] != 3)
+            {
                 player.transform.parent = scenes[boxScene[1]].transform;
 
                 nextSceneCollider = scenes[boxScene[1]].GetComponent<BoxCollider2D>();
@@ -201,7 +211,8 @@ public class CustomSceneManager : MonoBehaviour
                 playerIndex = boxScene[1];
                 playerBoxIndex = 1;
             }
-            else if (playerBoxIndex == 2 && boxScene[3] != 3) {
+            else if (playerBoxIndex == 2 && boxScene[3] != 3)
+            {
                 player.transform.parent = scenes[boxScene[1]].transform;
 
                 nextSceneCollider = scenes[boxScene[3]].GetComponent<BoxCollider2D>();
@@ -216,8 +227,10 @@ public class CustomSceneManager : MonoBehaviour
                 playerBoxIndex = 3;
             }
         }
-        else if (playerX + playerW < sceneX - sceneW) {
-            if (playerBoxIndex == 1 && boxScene[0] != 3) {
+        else if (playerX + playerW < sceneX - sceneW)
+        {
+            if (playerBoxIndex == 1 && boxScene[0] != 3)
+            {
                 player.transform.parent = scenes[boxScene[0]].transform;
 
                 nextSceneCollider = scenes[boxScene[0]].GetComponent<BoxCollider2D>();
@@ -231,7 +244,8 @@ public class CustomSceneManager : MonoBehaviour
                 playerIndex = boxScene[0];
                 playerBoxIndex = 0;
             }
-            else if (playerBoxIndex == 3 && boxScene[2] != 3) {
+            else if (playerBoxIndex == 3 && boxScene[2] != 3)
+            {
                 player.transform.parent = scenes[boxScene[0]].transform;
 
                 nextSceneCollider = scenes[boxScene[2]].GetComponent<BoxCollider2D>();
@@ -247,17 +261,21 @@ public class CustomSceneManager : MonoBehaviour
             }
         }
 
-        if(playerX + playerW > sceneX + sceneW) {
+        if (playerX + playerW > sceneX + sceneW)
+        {
             if (playerBoxIndex == 1 || playerBoxIndex == 3 ||
                 playerBoxIndex == 0 && boxScene[1] == 3 ||
-                playerBoxIndex == 2 && boxScene[3] == 3) {
+                playerBoxIndex == 2 && boxScene[3] == 3)
+            {
                 player.transform.position -= new Vector3(0.5f, 0.0f, 0.0f);
             }
         }
-        else if(playerX - playerW < sceneX - sceneW) {
+        else if (playerX - playerW < sceneX - sceneW)
+        {
             if (playerBoxIndex == 0 || playerBoxIndex == 2 ||
                 playerBoxIndex == 1 && boxScene[0] == 3 ||
-                playerBoxIndex == 3 && boxScene[2] == 3) {
+                playerBoxIndex == 3 && boxScene[2] == 3)
+            {
                 player.transform.position += new Vector3(0.5f, 0.0f, 0.0f);
             }
         }

@@ -26,14 +26,16 @@ public class PlayerCtr : MonoBehaviour
         // verticalInput = Input.GetAxis("Vertical");
         jump = Input.GetKeyDown(KeyCode.W);
 
-        if (jumpCount > 0 && moveSpeed > 0) {
-            moveSpeed -= 5 * Time.deltaTime;
-            // horizontalInput += prevHorizontal;
-        }
+        // if (jumpCount > 0 && moveSpeed > 0)
+        // {
+        //     moveSpeed -= 5 * Time.deltaTime;
+        //     // horizontalInput += prevHorizontal;
+        // }
         transform.Translate(Vector3.right * horizontalInput * moveSpeed * Time.deltaTime);
 
         // if (verticalInput > 0 && jumpCount < 1) {
-        if (jump && jumpCount < 2) {
+        if (jump) // && jumpCount < 2)
+        {
             // prevHorizontal = horizontalInput;
             rbody2D.AddForce(transform.up * jumpForce);
             // transform.Translate(Vector3.up * jumpSpeed * Time.deltaTime);
@@ -42,14 +44,17 @@ public class PlayerCtr : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
+    private void OnCollisionEnter2D(Collision2D other)
+    {
         // Debug.LogFormat("jumpCount: = {0}", jumpCount);
         jumpCount = 0;
         moveSpeed = defaultSpeed;
-        if (other.gameObject.CompareTag("Goal") && keyGet) {
+        if (other.gameObject.CompareTag("Goal") && keyGet)
+        {
             SceneManager.LoadScene("Start Menu");
         }
-        else if (other.gameObject.CompareTag("Key")) {
+        else if (other.gameObject.CompareTag("Key"))
+        {
             Debug.LogFormat("Get key");
             keyGet = true;
             Destroy(other.gameObject);
