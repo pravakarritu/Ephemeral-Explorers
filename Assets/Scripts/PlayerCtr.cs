@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCtr : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerCtr : MonoBehaviour
     private bool jump;
     public float moveSpeed = 10, jumpForce = 250, defaultSpeed;
     private int jumpCount = 0;
+    private bool keyGet = false;
 
     private Rigidbody2D rbody2D;
 
@@ -15,6 +17,7 @@ public class PlayerCtr : MonoBehaviour
     {
         rbody2D = GetComponent<Rigidbody2D>();
         defaultSpeed = moveSpeed;
+        keyGet = false;
     }
 
     void Update()
@@ -43,10 +46,13 @@ public class PlayerCtr : MonoBehaviour
         // Debug.LogFormat("jumpCount: = {0}", jumpCount);
         jumpCount = 0;
         moveSpeed = defaultSpeed;
-        // if (other.gameObject.CompareTag("Scene")) {
-        //     Debug.LogFormat("jumpCount: = {0}", jumpCount);
-        //     jumpCount = 0;
-        //     moveSpeed = defaultSpeed;
-        // }
+        if (other.gameObject.CompareTag("Goal") && keyGet) {
+            SceneManager.LoadScene("Start Menu");
+        }
+        else if (other.gameObject.CompareTag("Key")) {
+            Debug.LogFormat("Get key");
+            keyGet = true;
+            Destroy(other.gameObject);
+        }
     }
 }
