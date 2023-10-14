@@ -4,6 +4,11 @@
     "m_Dictionary": {
         "m_DictionaryValues": [
             {
+                "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "buildOutputDirList",
+                "value": "{\"m_Value\":\"/Users/himanshurawlani/Documents/USC/Courses/CSCI 526 Games/ephemeral_explorer/AddMechanicsBuild/AddMechanicsBuild/AddMechanicsBuild/AddMechanicsBuild;/Users/himanshurawlani/Documents/USC/Courses/CSCI 526 Games/ephemeral_explorer/AddMechanicsBuild/AddMechanicsBuild/AddMechanicsBuild;;;;;;;;\"}"
+            },
+            {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "firstTime",
                 "value": "{\"m_Value\":false}"
@@ -12,16 +17,6 @@
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "autoPublish",
                 "value": "{\"m_Value\":true}"
-            },
-            {
-                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                "key": "createDefaultBuildsFolder",
-                "value": "{\"m_Value\":true}"
-            },
-            {
-                "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-                "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"C:/Users/prava/Alpha_Prototype_Progress_Check/WebGL Builds;;;;;;;;;\"}"
             }
         ]
     }
