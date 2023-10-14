@@ -34,7 +34,7 @@ public class PlayerCtr : MonoBehaviour
         transform.Translate(Vector3.right * horizontalInput * moveSpeed * Time.deltaTime);
 
         // if (verticalInput > 0 && jumpCount < 1) {
-        if (jump) // && jumpCount < 2)
+        if (jump && jumpCount < 1)
         {
             // prevHorizontal = horizontalInput;
             rbody2D.AddForce(transform.up * jumpForce);
