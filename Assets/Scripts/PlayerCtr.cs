@@ -51,7 +51,7 @@ public class PlayerCtr : MonoBehaviour
         moveSpeed = defaultSpeed;
         if (other.gameObject.CompareTag("Goal") && keyGet)
         {
-            SceneManager.LoadScene("Start Menu");
+            SceneManager.LoadScene("StartMenu");
         }
         else if (other.gameObject.CompareTag("Key"))
         {
