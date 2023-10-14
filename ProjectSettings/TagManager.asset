@@ -4,10 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Door
+  - Scene
+  - Goal
   - Key
-  - Player1
-  - Door1
   layers:
   - Default
   - TransparentFX
