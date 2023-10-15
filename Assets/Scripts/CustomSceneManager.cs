@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CustomSceneManager : MonoBehaviour
 {
@@ -17,10 +20,17 @@ public class CustomSceneManager : MonoBehaviour
     private Color32 activeColor = new Color32(0, 0, 200, 100);
 
     private Camera[] sceneCam = new Camera[4];
+    public TextMeshProUGUI player_movement_control;
+    public TextMeshProUGUI screen_control;
+    public TextMeshProUGUI screen_select;
 
 
     void Start()
     {
+        player_movement_control.gameObject.SetActive(true);
+        screen_control.gameObject.SetActive(true);
+        screen_select.gameObject.SetActive(true);
+
         scenes[0] = GameObject.Find("/Scene1");
         scenes[1] = GameObject.Find("/Scene2");
         scenes[2] = GameObject.Find("/Scene3");
