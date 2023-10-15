@@ -74,3 +74,6 @@ crashlytics-build.properties
 .DS_Store
 Temp
 .vscode
+WebGL Build
+connectwebgl.zip
+webgl_sharing
