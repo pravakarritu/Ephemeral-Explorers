@@ -25,8 +25,11 @@ public class CustomSceneManager : MonoBehaviour
     public TextMeshProUGUI screen_select;
 
 
+
+
     void Start()
     {
+
         player_movement_control.gameObject.SetActive(true);
         screen_control.gameObject.SetActive(true);
         screen_select.gameObject.SetActive(true);
