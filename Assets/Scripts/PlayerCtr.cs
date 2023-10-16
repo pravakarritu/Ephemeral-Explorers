@@ -76,7 +76,7 @@ public class PlayerCtr : MonoBehaviour
             jumpFinish = isJumpFin;
         }
 
-        int layer_mask = LayerMask.GetMask(new string[]{ "Default"});
+        int layer_mask = LayerMask.GetMask(new string[]{"Default"});
         RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position, -(Vector2)Vector3.up, 2.1f, layer_mask);
         if (hit.collider) {
             // Debug.LogFormat("Ray collided");

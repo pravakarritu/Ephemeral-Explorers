@@ -10,26 +10,39 @@ public class CustomSceneManager : MonoBehaviour
     private float moveHorizontal, moveVertiacal;
 
     private GameObject[] scenes = new GameObject[4];
+    private GameObject[] cameraFrame = new GameObject[4];
     private Vector3[] boxPos = new Vector3[4];
     private int[] boxScene = new int[4];
 
-    private Color32 normalColor = new Color32(0, 0, 0, 255);
-    private Color32 activeColor = new Color32(0, 0, 200, 100);
+    public Color32 normalColor = new Color32(190, 190, 190, 255);
+    public Color32 activeColor = new Color32(100, 100, 100, 255);
 
     private Camera[] sceneCam = new Camera[4];
 
 
     void Start()
     {
-        scenes[0] = GameObject.Find("/Scene1");
-        scenes[1] = GameObject.Find("/Scene2");
-        scenes[2] = GameObject.Find("/Scene3");
-        scenes[3] = GameObject.Find("/Scene4");
+        // scenes[0] = GameObject.Find("/Scene1");
+        // scenes[1] = GameObject.Find("/Scene2");
+        // scenes[2] = GameObject.Find("/Scene3");
+        // scenes[3] = GameObject.Find("/Scene4");
 
-        boxPos[0] = scenes[0].transform.position;
-        boxPos[1] = scenes[1].transform.position;
-        boxPos[2] = scenes[2].transform.position;
-        boxPos[3] = scenes[2].transform.position;//GameObject.Find("/Scene4").transform.position;
+        // boxPos[0] = scenes[0].transform.position;
+        // boxPos[1] = scenes[1].transform.position;
+        // boxPos[2] = scenes[2].transform.position;
+        // boxPos[3] = scenes[3].transform.position;//GameObject.Find("/Scene4").transform.position;
+
+        //
+        cameraFrame[0] = GameObject.Find("/Scene1/GameWorld/CameraFrame");
+        cameraFrame[1] = GameObject.Find("/Scene2/GameWorld/CameraFrame");
+        cameraFrame[2] = GameObject.Find("/Scene3/GameWorld/CameraFrame");
+        cameraFrame[3] = GameObject.Find("/Scene4");
+
+        boxPos[0] = cameraFrame[0].transform.position;
+        boxPos[1] = cameraFrame[1].transform.position;
+        boxPos[2] = cameraFrame[2].transform.position;
+        boxPos[3] = cameraFrame[3].transform.position;//GameObject.Find("/Scene4").transform.position;
+        //
 
         boxScene[0] = 0;
         boxScene[1] = 1;
@@ -38,11 +51,15 @@ public class CustomSceneManager : MonoBehaviour
 
         player = GameObject.FindWithTag("Player");
         playerIndex = activeSceneIndex = activeBoxIndex = playerBoxIndex = 0;
-        scenes[activeSceneIndex].GetComponent<Renderer>().material.color = activeColor;
+        // scenes[activeSceneIndex].GetComponent<Renderer>().material.color = activeColor;
+        for (int i = 0; i < 4; ++i) {
+            GameObject childObj = cameraFrame[activeSceneIndex].transform.GetChild(i).gameObject;
+            childObj.GetComponent<Renderer>().material.color = activeColor;
+        }
 
-        sceneCam[0] = GameObject.Find("/Scene1/Scene1Camera").GetComponent<Camera>();
-        sceneCam[1] = GameObject.Find("/Scene2/Scene2Camera").GetComponent<Camera>();
-        sceneCam[2] = GameObject.Find("/Scene3/Scene3Camera").GetComponent<Camera>();
+        sceneCam[0] = GameObject.Find("/Scene1/GameWorld/CameraFrame/Scene1Camera").GetComponent<Camera>();
+        sceneCam[1] = GameObject.Find("/Scene2/GameWorld/CameraFrame/Scene2Camera").GetComponent<Camera>();
+        sceneCam[2] = GameObject.Find("/Scene3/GameWorld/CameraFrame/Scene3Camera").GetComponent<Camera>();
         sceneCam[3] = GameObject.Find("/Scene4/Scene4Camera").GetComponent<Camera>();
     }
 
@@ -51,11 +68,23 @@ public class CustomSceneManager : MonoBehaviour
         changeBox = Input.GetKeyDown(KeyCode.Space);
         if (changeBox)
         {
-            scenes[activeSceneIndex].GetComponent<Renderer>().material.color = normalColor;
+            Debug.LogFormat("After : activeSceneIndex = {0}", activeSceneIndex);
+            // scenes[activeSceneIndex].GetComponent<Renderer>().material.color = normalColor;
+            // ++activeSceneIndex;
+            // activeSceneIndex %= 3;
+            // scenes[activeSceneIndex].GetComponent<Renderer>().material.color = activeColor;
+
+            for (int i = 0; i < 4; ++i) {
+                GameObject childObj = cameraFrame[activeSceneIndex].transform.GetChild(i).gameObject;
+                childObj.GetComponent<Renderer>().material.color = normalColor;
+            }
             ++activeSceneIndex;
             activeSceneIndex %= 3;
-            scenes[activeSceneIndex].GetComponent<Renderer>().material.color = activeColor;
-
+            for (int i = 0; i < 4; ++i) {
+                GameObject childObj = cameraFrame[activeSceneIndex].transform.GetChild(i).gameObject;
+                childObj.GetComponent<Renderer>().material.color = activeColor;
+            }
+            
             for (int i = 0; i < 4; ++i)
             {
                 if (boxScene[i] == activeSceneIndex)
@@ -63,6 +92,7 @@ public class CustomSceneManager : MonoBehaviour
                     activeBoxIndex = i;
                 }
             }
+            Debug.LogFormat("Before : activeSceneIndex = {0}", activeSceneIndex);
         }
 
         leftArrow = Input.GetKeyDown(KeyCode.LeftArrow);
@@ -182,10 +212,14 @@ public class CustomSceneManager : MonoBehaviour
         playerCollider = player.GetComponent<BoxCollider2D>();
         float playerX = player.transform.position.x;
         float playerW = playerCollider.bounds.size.x / 2;
-        Vector3 curRelativePos = scenes[playerIndex].transform.position - player.transform.position;
+        // Vector3 curRelativePos = scenes[playerIndex].transform.position - player.transform.position;
+        Vector3 curRelativePos = cameraFrame[playerIndex].transform.position - player.transform.position;
 
-        curSceneCollider = scenes[playerIndex].GetComponent<BoxCollider2D>();
-        float sceneX = scenes[playerIndex].transform.position.x;
+        GameObject curChildObj = cameraFrame[playerIndex].transform.GetChild(0).gameObject;
+        curSceneCollider = curChildObj.GetComponent<BoxCollider2D>();
+        float sceneX = cameraFrame[playerIndex].transform.position.x;
+        // curSceneCollider = scenes[playerIndex].GetComponent<BoxCollider2D>();
+        // float sceneX = scenes[playerIndex].transform.position.x;
         float sceneW = curSceneCollider.bounds.size.x / 2;
 
         // for (int i = 0; i < 4; ++i) {
@@ -198,11 +232,17 @@ public class CustomSceneManager : MonoBehaviour
         {
             if (playerBoxIndex == 0 && boxScene[1] != 3)
             {
-                player.transform.parent = scenes[boxScene[1]].transform;
+                // player.transform.parent = scenes[boxScene[1]].transform;
 
-                nextSceneCollider = scenes[boxScene[1]].GetComponent<BoxCollider2D>();
-                float nextSceneX = scenes[boxScene[1]].transform.position.x;
-                float nextSceneY = scenes[boxScene[1]].transform.position.y;
+                // nextSceneCollider = scenes[boxScene[1]].GetComponent<BoxCollider2D>();
+                // float nextSceneX = scenes[boxScene[1]].transform.position.x;
+                // float nextSceneY = scenes[boxScene[1]].transform.position.y;
+                player.transform.parent = cameraFrame[boxScene[1]].transform;
+                GameObject nextChildObj = cameraFrame[boxScene[1]].transform.GetChild(0).gameObject;
+                nextSceneCollider = nextChildObj.GetComponent<BoxCollider2D>();
+                float nextSceneX = cameraFrame[boxScene[1]].transform.position.x;
+                float nextSceneY = cameraFrame[boxScene[1]].transform.position.y;
+
                 float nextSceneW = nextSceneCollider.bounds.size.x / 2;
                 float nextPlayerX = nextSceneX - nextSceneW;
                 float nextPlayerY = nextSceneY - curRelativePos.y;
@@ -213,11 +253,17 @@ public class CustomSceneManager : MonoBehaviour
             }
             else if (playerBoxIndex == 2 && boxScene[3] != 3)
             {
-                player.transform.parent = scenes[boxScene[1]].transform;
+                // player.transform.parent = scenes[boxScene[1]].transform;
 
-                nextSceneCollider = scenes[boxScene[3]].GetComponent<BoxCollider2D>();
-                float nextSceneX = scenes[boxScene[3]].transform.position.x;
-                float nextSceneY = scenes[boxScene[3]].transform.position.y;
+                // nextSceneCollider = scenes[boxScene[3]].GetComponent<BoxCollider2D>();
+                // float nextSceneX = scenes[boxScene[3]].transform.position.x;
+                // float nextSceneY = scenes[boxScene[3]].transform.position.y;
+                player.transform.parent = cameraFrame[boxScene[3]].transform;
+                GameObject nextChildObj = cameraFrame[boxScene[3]].transform.GetChild(0).gameObject;
+                nextSceneCollider = nextChildObj.GetComponent<BoxCollider2D>();
+                float nextSceneX = cameraFrame[boxScene[3]].transform.position.x;
+                float nextSceneY = cameraFrame[boxScene[3]].transform.position.y;
+
                 float nextSceneW = nextSceneCollider.bounds.size.x / 2;
                 float nextPlayerX = nextSceneX - nextSceneW;
                 float nextPlayerY = nextSceneY - curRelativePos.y;
@@ -231,11 +277,17 @@ public class CustomSceneManager : MonoBehaviour
         {
             if (playerBoxIndex == 1 && boxScene[0] != 3)
             {
-                player.transform.parent = scenes[boxScene[0]].transform;
+                // player.transform.parent = scenes[boxScene[0]].transform;
 
-                nextSceneCollider = scenes[boxScene[0]].GetComponent<BoxCollider2D>();
-                float nextSceneX = scenes[boxScene[0]].transform.position.x;
-                float nextSceneY = scenes[boxScene[0]].transform.position.y;
+                // nextSceneCollider = scenes[boxScene[0]].GetComponent<BoxCollider2D>();
+                // float nextSceneX = scenes[boxScene[0]].transform.position.x;
+                // float nextSceneY = scenes[boxScene[0]].transform.position.y;
+                player.transform.parent = cameraFrame[boxScene[0]].transform;
+                GameObject nextChildObj = cameraFrame[boxScene[0]].transform.GetChild(0).gameObject;
+                nextSceneCollider = nextChildObj.GetComponent<BoxCollider2D>();
+                float nextSceneX = cameraFrame[boxScene[0]].transform.position.x;
+                float nextSceneY = cameraFrame[boxScene[0]].transform.position.y;
+
                 float nextSceneW = nextSceneCollider.bounds.size.x / 2;
                 float nextPlayerX = nextSceneX + nextSceneW;
                 float nextPlayerY = nextSceneY - curRelativePos.y;
@@ -246,11 +298,17 @@ public class CustomSceneManager : MonoBehaviour
             }
             else if (playerBoxIndex == 3 && boxScene[2] != 3)
             {
-                player.transform.parent = scenes[boxScene[0]].transform;
+                // player.transform.parent = scenes[boxScene[0]].transform;
 
-                nextSceneCollider = scenes[boxScene[2]].GetComponent<BoxCollider2D>();
-                float nextSceneX = scenes[boxScene[2]].transform.position.x;
-                float nextSceneY = scenes[boxScene[2]].transform.position.y;
+                // nextSceneCollider = scenes[boxScene[2]].GetComponent<BoxCollider2D>();
+                // float nextSceneX = scenes[boxScene[2]].transform.position.x;
+                // float nextSceneY = scenes[boxScene[2]].transform.position.y;
+                player.transform.parent = cameraFrame[boxScene[2]].transform;
+                GameObject nextChildObj = cameraFrame[boxScene[2]].transform.GetChild(0).gameObject;
+                nextSceneCollider = nextChildObj.GetComponent<BoxCollider2D>();
+                float nextSceneX = cameraFrame[boxScene[2]].transform.position.x;
+                float nextSceneY = cameraFrame[boxScene[2]].transform.position.y;
+
                 float nextSceneW = nextSceneCollider.bounds.size.x / 2;
                 float nextPlayerX = nextSceneX + nextSceneW;
                 float nextPlayerY = nextSceneY - curRelativePos.y;
