@@ -8,6 +8,8 @@ TagManager:
   - Goal
   - Key
   - StartButton
+  - Controls
+  - GameTask
   layers:
   - Default
   - TransparentFX
