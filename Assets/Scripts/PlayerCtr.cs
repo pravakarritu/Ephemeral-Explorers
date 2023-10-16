@@ -105,7 +105,7 @@ public class PlayerCtr : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Goal") && keyGet) {
-            SceneManager.LoadScene("StartMenu");
+            SceneManager.LoadScene("LevelComplete");
         }
         else if (other.gameObject.CompareTag("Key")) {
             Debug.LogFormat("Get key");
