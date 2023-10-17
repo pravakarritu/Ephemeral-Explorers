@@ -6,8 +6,8 @@ public class TutorialButton : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject wholeWorld;
-
     public GameObject tutorial;
+    public GameObject levels;
     void Start()
     {
         
@@ -20,15 +20,22 @@ public class TutorialButton : MonoBehaviour
     }
 
     public void unActiveWorld(){
-
-        wholeWorld.SetActive(false);
+        // wholeWorld.SetActive(false);
         tutorial.SetActive(true);
-        
     }
 
     public void ActiveWorld(){
-        wholeWorld.SetActive(true);
+        // wholeWorld.SetActive(true);
         tutorial.SetActive(false);
-        
     }
+
+    public void ActiveLevels(){
+        levels.SetActive(true);
+    }
+
+     public void unActiveLevels(){
+        levels.SetActive(false);
+    }
+
+
 }
