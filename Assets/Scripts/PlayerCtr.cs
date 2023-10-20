@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine;
 using TMPro;
 
 public class PlayerCtr : MonoBehaviour
@@ -33,9 +32,9 @@ public class PlayerCtr : MonoBehaviour
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        bool isJump = Input.GetKey(KeyCode.W);
-        bool isJumpStart = Input.GetKeyDown(KeyCode.W);
-        bool isJumpFin = Input.GetKeyUp(KeyCode.W);
+        bool isJump = Input.GetKey(KeyCode.UpArrow);
+        bool isJumpStart = Input.GetKeyDown(KeyCode.UpArrow);
+        bool isJumpFin = Input.GetKeyUp(KeyCode.UpArrow);
 
         xSpeed = horizontalInput * moveSpeed;
 
