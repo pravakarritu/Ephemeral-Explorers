@@ -65,6 +65,16 @@ public class BoxManager : MonoBehaviour
             }
         }
 
+        bool rotate = Input.GetKeyDown(KeyCode.RightShift);
+        if (rotate) {
+            for (int i=0; i < box[activeBoxIndex].transform.childCount; ++i) {
+                GameObject childObj = box[activeBoxIndex].transform.GetChild(i).gameObject;
+                if (childObj.name == "GameWorld") {
+                    childObj.transform.Rotate(Vector3.forward * -90);
+                }
+            }
+        }
+
         // Box movement
         bool left = Input.GetKeyDown(KeyCode.A);
         bool right = Input.GetKeyDown(KeyCode.D);
