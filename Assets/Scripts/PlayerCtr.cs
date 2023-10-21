@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine;
 using TMPro;
 
 public class PlayerCtr : MonoBehaviour
@@ -19,6 +18,9 @@ public class PlayerCtr : MonoBehaviour
     private Rigidbody2D rbody2D;
     float xSpeed, ySpeed;
 
+    private GameObject playerAnim;
+    private Animator anim;
+
     void Start()
     {
         rbody2D = GetComponent<Rigidbody2D>();
@@ -27,23 +29,34 @@ public class PlayerCtr : MonoBehaviour
         jumpCount = 0;
         jumpTime = 0.0f;
         jumpTimeLimit = 0.3f;
-        jumpFinish = false;
+        jumpFinish = true;
+
+        playerAnim = transform.GetChild(0).gameObject;
+        anim = playerAnim.GetComponent<Animator>();
     }
 
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        bool isJump = Input.GetKey(KeyCode.W);
-        bool isJumpStart = Input.GetKeyDown(KeyCode.W);
-        bool isJumpFin = Input.GetKeyUp(KeyCode.W);
+        bool isJump = Input.GetKey(KeyCode.UpArrow);
+        bool isJumpStart = Input.GetKeyDown(KeyCode.UpArrow);
+        bool isJumpFin = Input.GetKeyUp(KeyCode.UpArrow);
 
         xSpeed = horizontalInput * moveSpeed;
 
-        if (horizontalInput != 0) {
+        if (horizontalInput > 0) {
             dashTime += Time.deltaTime;
+            playerAnim.transform.localScale = new Vector3(1, 1, 1);
+            anim.SetBool("horizontal", true);
+        }
+        else if (horizontalInput < 0) {
+            dashTime += Time.deltaTime;
+            playerAnim.transform.localScale = new Vector3(-1, 1, 1);
+            anim.SetBool("horizontal", true);
         }
         else if (horizontalInput == 0) {
             dashTime = 0.0f;
+            anim.SetBool("horizontal", false);
         }
         else if (horizontalInput > 0 && prevHorizontal < 0) {
             dashTime = 0.0f;
@@ -72,7 +85,8 @@ public class PlayerCtr : MonoBehaviour
         }
 
         int layer_mask = LayerMask.GetMask(new string[]{"Default"});
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position, -(Vector2)Vector3.up, 2.1f, layer_mask);
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position, -(Vector2)Vector3.up, 3.5f, layer_mask);
+        // Debug.DrawRay((Vector2)transform.position, -(Vector2)Vector3.up * 3.5f, Color.red, 100.0f,false);
         if (hit.collider) {
             if (jumpFinish) {
                 jumpTime = 0;
@@ -80,6 +94,10 @@ public class PlayerCtr : MonoBehaviour
                 jumpFinish = false;
             }
             moveSpeed = defaultSpeed;
+            anim.SetBool("jump", false);
+        }
+        else {
+            anim.SetBool("jump", true);
         }
 
         rbody2D.velocity = new Vector3(xSpeed, ySpeed);
