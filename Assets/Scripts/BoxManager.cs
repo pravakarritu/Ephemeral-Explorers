@@ -173,14 +173,14 @@ public class BoxManager : MonoBehaviour
                 playerMapIndex += 1;
             }
         }
-        else if (playerY + playerH < parentY - parentH && row != 0) {
+        else if (playerY - playerH > parentY + parentH && row != 0) {
             int upBoxID = boxMap[row-1][col];
             if (upBoxID != emptyBoxIndex) {
                 player.transform.parent = box[upBoxID].transform;
                 playerMapIndex -= boxCol;
             }
         }
-        else if (playerY - playerH > parentY + parentH && row != boxRow-1) {
+        else if (playerY + playerH < parentY - parentH && row != boxRow-1) {
             int downBoxID = boxMap[row+1][col];
             if (downBoxID != emptyBoxIndex) {
                 player.transform.parent = box[downBoxID].transform;
