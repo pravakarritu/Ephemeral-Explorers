@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.Networking;
 
 public class PlayerCtr : MonoBehaviour
 {
@@ -115,13 +116,41 @@ public class PlayerCtr : MonoBehaviour
             // Send Analytics when game ends
             metricManager.EndRun();
             string result = metricManager.GetResult();
-            // StartCoroutine(GetRequest(result));
+            StartCoroutine(GetRequest(result));
 
             SceneManager.LoadScene("LevelComplete");
         }
         else if (other.gameObject.CompareTag("Key")) {
             keyGet = true;
             Destroy(other.gameObject);
+        }
+    }
+
+
+    // Send the analytics to the google form
+        IEnumerator GetRequest(string uri)
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+        {
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+
+            string[] pages = uri.Split('/');
+            int page = pages.Length - 1;
+
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.ConnectionError:
+                case UnityWebRequest.Result.DataProcessingError:
+                    Debug.LogError(pages[page] + ": Error: " + webRequest.error);
+                    break;
+                case UnityWebRequest.Result.ProtocolError:
+                    Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
+                    break;
+                case UnityWebRequest.Result.Success:
+                    Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
+                    break;
+            }
         }
     }
 }
