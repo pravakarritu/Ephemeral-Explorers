@@ -21,6 +21,9 @@ public class PlayerCtr : MonoBehaviour
     private GameObject playerAnim;
     private Animator anim;
 
+    // Metric Manager 
+    private MetricManager metricManager;
+
     void Start()
     {
         rbody2D = GetComponent<Rigidbody2D>();
@@ -33,6 +36,9 @@ public class PlayerCtr : MonoBehaviour
 
         playerAnim = transform.GetChild(0).gameObject;
         anim = playerAnim.GetComponent<Animator>();
+
+        // Metric Manager Initialization
+        metricManager = FindObjectOfType<MetricManager>();
     }
 
     void Update()
@@ -106,6 +112,11 @@ public class PlayerCtr : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Goal") && keyGet) {
+            // Send Analytics when game ends
+            metricManager.EndRun();
+            string result = metricManager.GetResult();
+            // StartCoroutine(GetRequest(result));
+
             SceneManager.LoadScene("LevelComplete");
         }
         else if (other.gameObject.CompareTag("Key")) {
