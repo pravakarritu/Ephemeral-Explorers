@@ -8,5 +8,6 @@ public class SceneTransition : MonoBehaviour
     public void LoadScene()
     {
         SceneManager.LoadScene(sceneToLoad);
+        Debug.Log("ButtonWorks");
     }
 }
