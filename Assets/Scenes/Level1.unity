@@ -2927,6 +2927,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1924216583}
   - component: {fileID: 1924216584}
+  - component: {fileID: 1924216585}
   m_Layer: 0
   m_Name: BoxManager
   m_TagString: Untagged
@@ -2985,6 +2986,19 @@ MonoBehaviour:
   player_movement_control: {fileID: 0}
   screen_control: {fileID: 0}
   screen_select: {fileID: 0}
+--- !u!114 &1924216585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924216582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5c2db346ef9454a9928efeb7681a55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: GameOver
 --- !u!1 &2009296717 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2851554909205114910, guid: 24243c04dd0c2427ca47c8c907c5dd8a, type: 3}

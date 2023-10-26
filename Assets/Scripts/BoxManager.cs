@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using UnityEngine.SceneManagement;
+
 public class BoxManager : MonoBehaviour
 {
     public int boxNum = 4, boxRow = 2, boxCol = 2, emptyBoxIndex = 3;
@@ -190,22 +192,42 @@ public class BoxManager : MonoBehaviour
 
         if (playerX + playerW > parentX + parentW) {
             if (col == boxCol-1 || boxMap[row][col+1] == emptyBoxIndex) {
-                player.transform.position -= new Vector3(0.8f, 0.0f, 0.0f);
+                PlayerCtr playerCtr = player.GetComponent<PlayerCtr>();
+                SceneTransition st = GetComponent<SceneTransition>();
+                st.SetLevels(playerCtr.curLevel, playerCtr.nextLevel);
+                st.LoadScene();
+                // SceneManager.LoadScene("GameOver");
+                // player.transform.position -= new Vector3(0.8f, 0.0f, 0.0f);
             }
         }
         else if (playerX - playerW < parentX - parentW) {
             if (col == 0 || boxMap[row][col-1] == emptyBoxIndex) {
-                player.transform.position += new Vector3(0.8f, 0.0f, 0.0f);
+                PlayerCtr playerCtr = player.GetComponent<PlayerCtr>();
+                SceneTransition st = GetComponent<SceneTransition>();
+                st.SetLevels(playerCtr.curLevel, playerCtr.nextLevel);
+                st.LoadScene();
+                // SceneManager.LoadScene("GameOver");
+                // player.transform.position += new Vector3(0.8f, 0.0f, 0.0f);
             }
         }
         else if (playerY + playerH > parentY + parentH) {
             if (row == 0 || boxMap[row-1][col] == emptyBoxIndex) {
-                player.transform.position -= new Vector3(0.0f, 0.8f, 0.0f);
+                PlayerCtr playerCtr = player.GetComponent<PlayerCtr>();
+                SceneTransition st = GetComponent<SceneTransition>();
+                st.SetLevels(playerCtr.curLevel, playerCtr.nextLevel);
+                st.LoadScene();
+                // SceneManager.LoadScene("GameOver");
+                // player.transform.position -= new Vector3(0.0f, 0.8f, 0.0f);
             }
         }
-        else if (playerY + playerH < parentY - parentH) {
+        else if (playerY - playerH < parentY - parentH) {
             if (row == boxRow-1 || boxMap[row+1][col] == emptyBoxIndex) {
-                player.transform.position += new Vector3(0.0f, 0.8f, 0.0f);
+                PlayerCtr playerCtr = player.GetComponent<PlayerCtr>();
+                SceneTransition st = GetComponent<SceneTransition>();
+                st.SetLevels(playerCtr.curLevel, playerCtr.nextLevel);
+                st.LoadScene();
+                // SceneManager.LoadScene("GameOver");
+                // player.transform.position += new Vector3(0.0f, 0.8f, 0.0f);
             }
         }
     }
