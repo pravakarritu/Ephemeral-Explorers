@@ -115,6 +115,7 @@ public class BoxManager : MonoBehaviour
                 }
                 emptyMapIndex += boxCol;
             }
+        }
 
 
         // Player Movement
