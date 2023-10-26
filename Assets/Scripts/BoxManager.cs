@@ -16,7 +16,7 @@ public class BoxManager : MonoBehaviour
     private GameObject player;
     PlayerCtr playerCtr;
 
-    private int activeBoxIndex, playerMapIndex, activeMapIndex;
+    private int activeBoxIndex, playerMapIndex, activeMapIndex, emptyMapIndex;
 
     // private Color32 normalColor = new Color32(0, 0, 0, 0);
     private Color32 normalColor = new Color32(255, 255, 255, 255);
@@ -37,6 +37,7 @@ public class BoxManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerCtr = player.GetComponent<PlayerCtr>();
         activeBoxIndex = playerMapIndex = 0;
+        emptyMapIndex = emptyBoxIndex;
         for (int i = 0; i < 4; ++i) {
             GameObject childObj = frame[activeBoxIndex].transform.GetChild(i).gameObject;
             childObj.GetComponent<Renderer>().material.color = activeColor;
@@ -46,43 +47,12 @@ public class BoxManager : MonoBehaviour
     void Update()
     {
         if (!playerCtr.IsZoomIn()) {
-            // Select Box to move
-            bool changeBox = Input.GetKeyDown(KeyCode.Tab);
-            if (changeBox)
-            {
-                for (int i = 0; i < 4; ++i) {
-                    GameObject childObj = frame[activeBoxIndex].transform.GetChild(i).gameObject;
-                    childObj.GetComponent<Renderer>().material.color = normalColor;
-                }
-                ++activeMapIndex;
-                activeMapIndex %= boxNum;
-                int mapRow = activeMapIndex / boxCol;
-                int mapCol = activeMapIndex - boxCol*mapRow;
-                while (boxMap[mapRow][mapCol] == emptyBoxIndex) {
-                    ++activeMapIndex;
-                    activeMapIndex %= boxNum;
-                    mapRow = activeMapIndex / boxCol;
-                    mapCol = activeMapIndex - boxCol*mapRow;
-                }
-                activeBoxIndex = boxMap[mapRow][mapCol];
-                for (int i = 0; i < 4; ++i) {
-                    GameObject childObj = frame[activeBoxIndex].transform.GetChild(i).gameObject;
-                    childObj.GetComponent<Renderer>().material.color = activeColor;
-                }
-            }
-
             bool rotate = Input.GetKeyDown(KeyCode.RightShift);
             if (rotate) {
                 int r_row = playerMapIndex / boxCol;
                 int r_col = playerMapIndex - boxCol*r_row;
                 box[boxMap[r_row][r_col]].transform.Rotate(Vector3.forward * -90);
                 player.transform.Rotate(Vector3.forward * 90);
-                // for (int i=0; i < box[activeBoxIndex].transform.childCount; ++i) {
-                //     GameObject childObj = box[activeBoxIndex].transform.GetChild(i).gameObject;
-                //     if (childObj.name == "GameWorld") {
-                //         childObj.transform.Rotate(Vector3.forward * -90);
-                //     }
-                // }
             }
 
             // Box movement
@@ -91,69 +61,61 @@ public class BoxManager : MonoBehaviour
             bool up = Input.GetKeyDown(KeyCode.UpArrow);
             bool down = Input.GetKeyDown(KeyCode.DownArrow);
 
-            int row = activeMapIndex / boxCol;
-            int col = activeMapIndex - boxCol*row;
-            if (left && col != 0) {
-                int leftBoxID = boxMap[row][col-1];
-                if (leftBoxID == emptyBoxIndex) {
-                    Vector3 tmp = box[activeBoxIndex].transform.position;
-                    box[activeBoxIndex].transform.position = box[emptyBoxIndex].transform.position;
-                    box[emptyBoxIndex].transform.position = tmp;
-
-                    boxMap[row][col-1] = activeBoxIndex;
-                    boxMap[row][col] = emptyBoxIndex;
-                    if (activeMapIndex == playerMapIndex) {
-                        playerMapIndex -= 1;
-                    }
-                    activeMapIndex -= 1;
-                }
-            }
-            else if (right && col != boxCol-1) {
+            int row = emptyMapIndex / boxCol;
+            int col = emptyMapIndex - boxCol * row;
+            if (left && col != boxCol-1) {
                 int rightBoxID = boxMap[row][col+1];
-                if (rightBoxID == emptyBoxIndex) {
-                    Vector3 tmp = box[activeBoxIndex].transform.position;
-                    box[activeBoxIndex].transform.position = box[emptyBoxIndex].transform.position;
-                    box[emptyBoxIndex].transform.position = tmp;
+                Vector3 tmp = box[rightBoxID].transform.position;
+                box[rightBoxID].transform.position = box[emptyBoxIndex].transform.position;
+                box[emptyBoxIndex].transform.position = tmp;
 
-                    boxMap[row][col+1] = activeBoxIndex;
-                    boxMap[row][col] = emptyBoxIndex;
-                    if (activeMapIndex == playerMapIndex) {
-                        playerMapIndex += 1;
-                    }
-                    activeMapIndex += 1;
+                boxMap[row][col+1] = emptyBoxIndex;
+                boxMap[row][col] = rightBoxID;
+                if (emptyMapIndex+1 == playerMapIndex) {
+                    playerMapIndex -= 1;
                 }
+                emptyMapIndex += 1;
             }
-            else if (up && row != 0) {
+            else if (right && col != 0) {
+                int leftBoxID = boxMap[row][col-1];
+                Vector3 tmp = box[leftBoxID].transform.position;
+                box[leftBoxID].transform.position = box[emptyBoxIndex].transform.position;
+                box[emptyBoxIndex].transform.position = tmp;
+
+                boxMap[row][col-1] = emptyBoxIndex;
+                boxMap[row][col] = leftBoxID;
+                if (emptyMapIndex-1 == playerMapIndex) {
+                    playerMapIndex += 1;
+                }
+                emptyMapIndex -= 1;
+            }
+            else if (down && row != 0) {
                 int upBoxID = boxMap[row-1][col];
-                if (upBoxID == emptyBoxIndex) {
-                    Vector3 tmp = box[activeBoxIndex].transform.position;
-                    box[activeBoxIndex].transform.position = box[emptyBoxIndex].transform.position;
-                    box[emptyBoxIndex].transform.position = tmp;
+                Vector3 tmp = box[upBoxID].transform.position;
+                box[upBoxID].transform.position = box[emptyBoxIndex].transform.position;
+                box[emptyBoxIndex].transform.position = tmp;
 
-                    boxMap[row-1][col] = activeBoxIndex;
-                    boxMap[row][col] = emptyBoxIndex;
-                    if (activeMapIndex == playerMapIndex) {
-                        playerMapIndex -= boxCol;
-                    }
-                    activeMapIndex -= boxCol;
+                boxMap[row-1][col] = emptyBoxIndex;
+                boxMap[row][col] = upBoxID;
+                if (emptyMapIndex-boxCol == playerMapIndex) {
+                    playerMapIndex += boxCol;
                 }
+                emptyMapIndex -= boxCol;
             }
-            else if (down && row != boxRow-1) {
+            else if (up && row != boxRow-1) {
                 int downBoxID = boxMap[row+1][col];
-                if (downBoxID == emptyBoxIndex) {
-                    Vector3 tmp = box[activeBoxIndex].transform.position;
-                    box[activeBoxIndex].transform.position = box[emptyBoxIndex].transform.position;
-                    box[emptyBoxIndex].transform.position = tmp;
+                Vector3 tmp = box[downBoxID].transform.position;
+                box[downBoxID].transform.position = box[emptyBoxIndex].transform.position;
+                box[emptyBoxIndex].transform.position = tmp;
 
-                    boxMap[row+1][col] = activeBoxIndex;
-                    boxMap[row][col] = emptyBoxIndex;
-                    if (activeMapIndex == playerMapIndex) {
-                        playerMapIndex += boxCol;
-                    }
-                    activeMapIndex += boxCol;
+                boxMap[row+1][col] = emptyBoxIndex;
+                boxMap[row][col] = downBoxID;
+                if (emptyMapIndex+boxCol == playerMapIndex) {
+                    playerMapIndex -= boxCol;
                 }
+                emptyMapIndex += boxCol;
             }
-        }
+
 
         // Player Movement
         float playerX = player.transform.position.x;
@@ -204,8 +166,6 @@ public class BoxManager : MonoBehaviour
                 SceneTransition st = GetComponent<SceneTransition>();
                 st.SetLevels(playerCtr.curLevel, playerCtr.nextLevel);
                 st.LoadScene();
-                // SceneManager.LoadScene("GameOver");
-                // player.transform.position -= new Vector3(0.8f, 0.0f, 0.0f);
             }
         }
         else if (playerX - playerW < parentX - parentW) {
@@ -213,8 +173,6 @@ public class BoxManager : MonoBehaviour
                 SceneTransition st = GetComponent<SceneTransition>();
                 st.SetLevels(playerCtr.curLevel, playerCtr.nextLevel);
                 st.LoadScene();
-                // SceneManager.LoadScene("GameOver");
-                // player.transform.position += new Vector3(0.8f, 0.0f, 0.0f);
             }
         }
         else if (playerY + playerH > parentY + parentH) {
@@ -222,8 +180,6 @@ public class BoxManager : MonoBehaviour
                 SceneTransition st = GetComponent<SceneTransition>();
                 st.SetLevels(playerCtr.curLevel, playerCtr.nextLevel);
                 st.LoadScene();
-                // SceneManager.LoadScene("GameOver");
-                // player.transform.position -= new Vector3(0.0f, 0.8f, 0.0f);
             }
         }
         else if (playerY - playerH < parentY - parentH) {
@@ -231,8 +187,6 @@ public class BoxManager : MonoBehaviour
                 SceneTransition st = GetComponent<SceneTransition>();
                 st.SetLevels(playerCtr.curLevel, playerCtr.nextLevel);
                 st.LoadScene();
-                // SceneManager.LoadScene("GameOver");
-                // player.transform.position += new Vector3(0.0f, 0.8f, 0.0f);
             }
         }
     }
