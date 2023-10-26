@@ -129,6 +129,13 @@ public class PlayerCtr : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Obstacle")) {
+            Debug.Log("Collide");
+            // rbody2D.velocity = new Vector3(-100, 0);
+            transform.position -= new Vector3(1.0f, 0.0f, 0.0f);
+        }
+    }
 
     // Send the analytics to the google form
         IEnumerator GetRequest(string uri)

@@ -12,6 +12,7 @@ TagManager:
   - GameTask
   - NextButton
   - RetryButton
+  - Obstacle
   layers:
   - Default
   - TransparentFX

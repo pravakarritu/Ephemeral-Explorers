@@ -69,12 +69,16 @@ public class BoxManager : MonoBehaviour
 
         bool rotate = Input.GetKeyDown(KeyCode.RightShift);
         if (rotate) {
-            for (int i=0; i < box[activeBoxIndex].transform.childCount; ++i) {
-                GameObject childObj = box[activeBoxIndex].transform.GetChild(i).gameObject;
-                if (childObj.name == "GameWorld") {
-                    childObj.transform.Rotate(Vector3.forward * -90);
-                }
-            }
+            int r_row = playerMapIndex / boxCol;
+            int r_col = playerMapIndex - boxCol*r_row;
+            box[boxMap[r_row][r_col]].transform.Rotate(Vector3.forward * -90);
+            player.transform.Rotate(Vector3.forward * 90);
+            // for (int i=0; i < box[activeBoxIndex].transform.childCount; ++i) {
+            //     GameObject childObj = box[activeBoxIndex].transform.GetChild(i).gameObject;
+            //     if (childObj.name == "GameWorld") {
+            //         childObj.transform.Rotate(Vector3.forward * -90);
+            //     }
+            // }
         }
 
         // Box movement
