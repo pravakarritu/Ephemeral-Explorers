@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694df175d50514e8abf43e01119f7ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 0}
   curLevel: Level1
   nextLevel: Level2
   dashCurve:
@@ -161,10 +162,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  moveSpeed: 20
-  jumpForce: 70
+  moveSpeed: 29
+  jumpForce: 200
   defaultSpeed: 0
-  gravity: 20
+  gravity: 35
 --- !u!50 &8556293815611484558
 Rigidbody2D:
   serializedVersion: 4
