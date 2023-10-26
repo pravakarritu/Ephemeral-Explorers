@@ -1199,8 +1199,8 @@ GameObject:
   - component: {fileID: 976467788}
   - component: {fileID: 976467791}
   m_Layer: 5
-  m_Name: Button
-  m_TagString: Untagged
+  m_Name: NextButton
+  m_TagString: NextButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1272,7 +1272,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 976467791}
         m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
-        m_MethodName: LoadScene
+        m_MethodName: Next
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1620,8 +1620,8 @@ GameObject:
   - component: {fileID: 1210460490}
   - component: {fileID: 1210460493}
   m_Layer: 5
-  m_Name: Button
-  m_TagString: Untagged
+  m_Name: RetryButton
+  m_TagString: RetryButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1693,7 +1693,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1210460493}
         m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
-        m_MethodName: LoadScene
+        m_MethodName: Retry
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1827,7 +1827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7014075638014144132, guid: f4344e9e262af4e73b7036067a1ffd57, type: 3}
       propertyPath: m_Name
-      value: Player (1)
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7014075638014144132, guid: f4344e9e262af4e73b7036067a1ffd57, type: 3}
       propertyPath: m_Layer
@@ -1835,7 +1835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7014075638014144132, guid: f4344e9e262af4e73b7036067a1ffd57, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7519647592289702500, guid: f4344e9e262af4e73b7036067a1ffd57, type: 3}
       propertyPath: m_Layer
@@ -1845,44 +1845,32 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.069
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8467371806042780018, guid: f4344e9e262af4e73b7036067a1ffd57, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f4344e9e262af4e73b7036067a1ffd57, type: 3}
 --- !u!4 &1290016235 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6251978365198635978, guid: f4344e9e262af4e73b7036067a1ffd57, type: 3}
   m_PrefabInstance: {fileID: 1290016234}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1787949078
+--- !u!1 &1290016236 stripped
 GameObject:
+  m_CorrespondingSourceObject: {fileID: 7014075638014144132, guid: f4344e9e262af4e73b7036067a1ffd57, type: 3}
+  m_PrefabInstance: {fileID: 1290016234}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1290016237
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1787949079}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1787949079
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1787949078}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -63.746174, y: -89.87145, z: -10.7845335}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 1290016236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5c2db346ef9454a9928efeb7681a55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: LevelComplete
 --- !u!1 &1796201997
 GameObject:
   m_ObjectHideFlags: 0
@@ -2224,7 +2212,7 @@ GameObject:
   - component: {fileID: 1986322753}
   - component: {fileID: 1986322756}
   m_Layer: 5
-  m_Name: Button
+  m_Name: MenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

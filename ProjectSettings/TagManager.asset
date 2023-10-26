@@ -10,6 +10,8 @@ TagManager:
   - StartButton
   - Controls
   - GameTask
+  - NextButton
+  - RetryButton
   layers:
   - Default
   - TransparentFX
