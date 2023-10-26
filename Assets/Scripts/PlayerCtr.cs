@@ -7,6 +7,12 @@ using UnityEngine.Networking;
 
 public class PlayerCtr : MonoBehaviour
 {
+    public Camera cam;
+    private Vector3 camDefaultPos;
+    private float camDefaultSize, zoomingTime;
+    private bool camZoomIn, camZoomStart;
+    private float camZoomSize = 25.0f, zoomEndTime = 0.4f;
+
     public string curLevel = "Level1", nextLevel = "Level2";
     public AnimationCurve dashCurve;
     public AnimationCurve jumpCurve;
@@ -28,6 +34,11 @@ public class PlayerCtr : MonoBehaviour
 
     void Start()
     {
+        camDefaultSize = cam.orthographicSize;
+        camDefaultPos = cam.transform.position;
+        camZoomIn = false;
+        camZoomStart = false;
+
         rbody2D = GetComponent<Rigidbody2D>();
         defaultSpeed = moveSpeed;
         keyGet = false;
@@ -45,70 +56,96 @@ public class PlayerCtr : MonoBehaviour
 
     void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        bool isJump = Input.GetKey(KeyCode.UpArrow);
-        bool isJumpStart = Input.GetKeyDown(KeyCode.UpArrow);
-        bool isJumpFin = Input.GetKeyUp(KeyCode.UpArrow);
+        bool zoomInOut = Input.GetKeyDown(KeyCode.Space);
+        if (zoomInOut) {
+            camZoomIn = !camZoomIn;
+            zoomingTime = 0.0f;
+            camZoomStart = true;
+        }
+        if (camZoomIn && camZoomStart) {
+            zoomingTime += Time.deltaTime;
+            Vector3 destPos = new Vector3(transform.position.x, transform.position.y, -10.0f);
+            cam.orthographicSize = Mathf.Lerp(camDefaultSize, camZoomSize, zoomingTime/zoomEndTime);
+            cam.transform.position = Vector3.Lerp(camDefaultPos, destPos, zoomingTime/zoomEndTime);
+            anim.enabled = true;
 
-        xSpeed = horizontalInput * moveSpeed;
+            horizontalInput = Input.GetAxis("Horizontal");
+            bool isJump = Input.GetKey(KeyCode.UpArrow);
+            bool isJumpStart = Input.GetKeyDown(KeyCode.UpArrow);
+            bool isJumpFin = Input.GetKeyUp(KeyCode.UpArrow);
 
-        if (horizontalInput > 0) {
-            dashTime += Time.deltaTime;
-            playerAnim.transform.localScale = new Vector3(1, 1, 1);
-            anim.SetBool("horizontal", true);
-        }
-        else if (horizontalInput < 0) {
-            dashTime += Time.deltaTime;
-            playerAnim.transform.localScale = new Vector3(-1, 1, 1);
-            anim.SetBool("horizontal", true);
-        }
-        else if (horizontalInput == 0) {
-            dashTime = 0.0f;
-            anim.SetBool("horizontal", false);
-        }
-        else if (horizontalInput > 0 && prevHorizontal < 0) {
-            dashTime = 0.0f;
-        }
-        else if (horizontalInput < 0 && prevHorizontal > 0) {
-            dashTime = 0.0f;
-        }
-        prevHorizontal = horizontalInput;
+            xSpeed = horizontalInput * moveSpeed;
 
-        xSpeed *= dashCurve.Evaluate(dashTime);
-
-        if (isJumpStart && jumpCount < 1 && jumpTime < jumpTimeLimit) {
-            jumpTime += Time.deltaTime;
-            ySpeed = jumpForce * jumpCurve.Evaluate(jumpTime);
-            ++jumpCount;
-        }
-        else if (!isJumpStart && isJump && jumpTime < jumpTimeLimit) {
-            jumpTime += Time.deltaTime;
-            ySpeed = jumpForce * jumpCurve.Evaluate(jumpTime);
-        }
-        else {
-            ySpeed = -gravity;
-        }
-        if (!jumpFinish) {
-            jumpFinish = isJumpFin;
-        }
-
-        int layer_mask = LayerMask.GetMask(new string[]{"Default"});
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position, -(Vector2)Vector3.up, 3.5f, layer_mask);
-        // Debug.DrawRay((Vector2)transform.position, -(Vector2)Vector3.up * 3.5f, Color.red, 100.0f,false);
-        if (hit.collider) {
-            if (jumpFinish) {
-                jumpTime = 0;
-                jumpCount = 0;
-                jumpFinish = false;
+            if (horizontalInput > 0) {
+                dashTime += Time.deltaTime;
+                playerAnim.transform.localScale = new Vector3(1, 1, 1);
+                anim.SetBool("horizontal", true);
             }
-            moveSpeed = defaultSpeed;
-            anim.SetBool("jump", false);
-        }
-        else {
-            anim.SetBool("jump", true);
-        }
+            else if (horizontalInput < 0) {
+                dashTime += Time.deltaTime;
+                playerAnim.transform.localScale = new Vector3(-1, 1, 1);
+                anim.SetBool("horizontal", true);
+            }
+            else if (horizontalInput == 0) {
+                dashTime = 0.0f;
+                anim.SetBool("horizontal", false);
+            }
+            else if (horizontalInput > 0 && prevHorizontal < 0) {
+                dashTime = 0.0f;
+            }
+            else if (horizontalInput < 0 && prevHorizontal > 0) {
+                dashTime = 0.0f;
+            }
+            prevHorizontal = horizontalInput;
 
-        rbody2D.velocity = new Vector3(xSpeed, ySpeed);
+            xSpeed *= dashCurve.Evaluate(dashTime);
+
+            if (isJumpStart && jumpCount < 1 && jumpTime < jumpTimeLimit) {
+                jumpTime += Time.deltaTime;
+                ySpeed = jumpForce * jumpCurve.Evaluate(jumpTime);
+                ++jumpCount;
+            }
+            else if (!isJumpStart && isJump && jumpTime < jumpTimeLimit) {
+                jumpTime += Time.deltaTime;
+                ySpeed = jumpForce * jumpCurve.Evaluate(jumpTime);
+            }
+            else {
+                ySpeed = -gravity;
+            }
+            if (!jumpFinish) {
+                jumpFinish = isJumpFin;
+            }
+
+            int layer_mask = LayerMask.GetMask(new string[]{"Default"});
+            RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position, -(Vector2)Vector3.up, 3.5f, layer_mask);
+            // Debug.DrawRay((Vector2)transform.position, -(Vector2)Vector3.up * 3.5f, Color.red, 100.0f,false);
+            if (hit.collider) {
+                if (jumpFinish) {
+                    jumpTime = 0;
+                    jumpCount = 0;
+                    jumpFinish = false;
+                }
+                moveSpeed = defaultSpeed;
+                anim.SetBool("jump", false);
+            }
+            else {
+                anim.SetBool("jump", true);
+            }
+
+            rbody2D.velocity = new Vector3(xSpeed, ySpeed);
+        }
+        else if (camZoomStart) {
+            zoomingTime += Time.deltaTime;
+            Vector3 srcPos = new Vector3(transform.position.x, transform.position.y, -10.0f);
+            cam.orthographicSize = Mathf.Lerp(camZoomSize, camDefaultSize, zoomingTime/zoomEndTime);
+            cam.transform.position = Vector3.Lerp(srcPos, camDefaultPos, zoomingTime/zoomEndTime);
+            rbody2D.velocity = new Vector3(0.0f, 0.0f);
+            anim.enabled = false;
+        }
+    }
+
+    public bool IsZoomIn() {
+        return camZoomIn;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
