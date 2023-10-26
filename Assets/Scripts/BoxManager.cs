@@ -16,7 +16,7 @@ public class BoxManager : MonoBehaviour
     private GameObject player;
     PlayerCtr playerCtr;
 
-    private int activeBoxIndex, playerMapIndex, activeMapIndex, emptyMapIndex;
+    private int playerMapIndex, emptyMapIndex;
 
     // private Color32 normalColor = new Color32(0, 0, 0, 0);
     private Color32 normalColor = new Color32(255, 255, 255, 255);
@@ -36,12 +36,8 @@ public class BoxManager : MonoBehaviour
         }
         player = GameObject.FindWithTag("Player");
         playerCtr = player.GetComponent<PlayerCtr>();
-        activeBoxIndex = playerMapIndex = 0;
+        playerMapIndex = 0;
         emptyMapIndex = emptyBoxIndex;
-        for (int i = 0; i < 4; ++i) {
-            GameObject childObj = frame[activeBoxIndex].transform.GetChild(i).gameObject;
-            childObj.GetComponent<Renderer>().material.color = activeColor;
-        }
     }
 
     void Update()
