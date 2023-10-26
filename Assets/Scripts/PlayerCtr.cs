@@ -113,7 +113,6 @@ public class PlayerCtr : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.LogFormat("collision detect");
         if (other.gameObject.CompareTag("Goal") && keyGet) {
             // Send Analytics when game ends
             metricManager.EndRun();
@@ -123,13 +122,10 @@ public class PlayerCtr : MonoBehaviour
             SceneTransition st = GetComponent<SceneTransition>();
             st.SetLevels(curLevel, nextLevel);
             st.LoadScene();
-            // SceneManager.LoadScene("LevelComplet");
-            Debug.LogFormat("door detect");
         }
         else if (other.gameObject.CompareTag("Key")) {
             keyGet = true;
             Destroy(other.gameObject);
-            Debug.LogFormat("key detect");
         }
     }
 
