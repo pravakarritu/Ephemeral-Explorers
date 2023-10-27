@@ -53,5 +53,9 @@ public class InteractiveTutorial : MonoBehaviour
         {
             ChangeAnimation();
         }
+        if (animtut.GetInteger("Change") == 7 && Input.GetKeyDown(KeyCode.Space))
+        {
+            ChangeAnimation();
+        }
     }
 }
