@@ -22,6 +22,7 @@ public class PlayerCtr : MonoBehaviour
     private int jumpCount;
     private bool jumpFinish;
     private bool keyGet = false;
+    private Vector3 velocity = Vector3.zero;
 
     private Rigidbody2D rbody2D;
     float xSpeed, ySpeed;
@@ -54,30 +55,45 @@ public class PlayerCtr : MonoBehaviour
         metricManager = FindObjectOfType<MetricManager>();
     }
 
+    void FixedUpdate()
+    {
+        // If the camera is zoomed in, then the player can move
+        if (camZoomIn && camZoomStart)
+        {
+            Vector3 destPos = new Vector3(transform.position.x, transform.position.y, -10.0f);
+            // Transform camera position using smooth damp
+            cam.transform.position = Vector3.SmoothDamp(cam.transform.position, destPos, ref velocity, 0.2f);
+        }
+    }
+
     void Update()
     {
+        // Check if space bar is pressed
         bool zoomInOut = Input.GetKeyDown(KeyCode.Space);
         if (zoomInOut)
         {
+            // Zoom state is opposite of the current state
             camZoomIn = !camZoomIn;
             zoomingTime = 0.0f;
             camZoomStart = true;
         }
+        // If the camera is zoomed in, then the player can move
         if (camZoomIn && camZoomStart)
         {
+            // Smoothly zoom in the camera
             zoomingTime += Time.deltaTime;
-            Vector3 destPos = new Vector3(transform.position.x, transform.position.y, -10.0f);
             cam.orthographicSize = Mathf.Lerp(camDefaultSize, camZoomSize, zoomingTime / zoomEndTime);
-            cam.transform.position = Vector3.Lerp(camDefaultPos, destPos, zoomingTime / zoomEndTime);
+            // cam.transform.position = Vector3.Lerp(camDefaultPos, destPos, zoomingTime / zoomEndTime);
             anim.enabled = true;
 
+            // Get player movement input
             horizontalInput = Input.GetAxis("Horizontal");
             bool isJump = Input.GetKey(KeyCode.UpArrow);
             bool isJumpStart = Input.GetKeyDown(KeyCode.UpArrow);
             bool isJumpFin = Input.GetKeyUp(KeyCode.UpArrow);
 
+            // Gradually increase/decrease the horizontal speed of the player
             xSpeed = horizontalInput * moveSpeed;
-
             if (horizontalInput > 0)
             {
                 dashTime += Time.deltaTime;
@@ -104,9 +120,9 @@ public class PlayerCtr : MonoBehaviour
                 dashTime = 0.0f;
             }
             prevHorizontal = horizontalInput;
-
             xSpeed *= dashCurve.Evaluate(dashTime);
 
+            // Allow the player to jump while the jump time is less than the limit
             if (isJumpStart && jumpCount < 1 && jumpTime < jumpTimeLimit)
             {
                 jumpTime += Time.deltaTime;
