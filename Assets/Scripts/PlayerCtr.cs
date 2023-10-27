@@ -57,16 +57,18 @@ public class PlayerCtr : MonoBehaviour
     void Update()
     {
         bool zoomInOut = Input.GetKeyDown(KeyCode.Space);
-        if (zoomInOut) {
+        if (zoomInOut)
+        {
             camZoomIn = !camZoomIn;
             zoomingTime = 0.0f;
             camZoomStart = true;
         }
-        if (camZoomIn && camZoomStart) {
+        if (camZoomIn && camZoomStart)
+        {
             zoomingTime += Time.deltaTime;
             Vector3 destPos = new Vector3(transform.position.x, transform.position.y, -10.0f);
-            cam.orthographicSize = Mathf.Lerp(camDefaultSize, camZoomSize, zoomingTime/zoomEndTime);
-            cam.transform.position = Vector3.Lerp(camDefaultPos, destPos, zoomingTime/zoomEndTime);
+            cam.orthographicSize = Mathf.Lerp(camDefaultSize, camZoomSize, zoomingTime / zoomEndTime);
+            cam.transform.position = Vector3.Lerp(camDefaultPos, destPos, zoomingTime / zoomEndTime);
             anim.enabled = true;
 
             horizontalInput = Input.GetAxis("Horizontal");
@@ -76,51 +78,62 @@ public class PlayerCtr : MonoBehaviour
 
             xSpeed = horizontalInput * moveSpeed;
 
-            if (horizontalInput > 0) {
+            if (horizontalInput > 0)
+            {
                 dashTime += Time.deltaTime;
                 playerAnim.transform.localScale = new Vector3(1, 1, 1);
                 anim.SetBool("horizontal", true);
             }
-            else if (horizontalInput < 0) {
+            else if (horizontalInput < 0)
+            {
                 dashTime += Time.deltaTime;
                 playerAnim.transform.localScale = new Vector3(-1, 1, 1);
                 anim.SetBool("horizontal", true);
             }
-            else if (horizontalInput == 0) {
+            else if (horizontalInput == 0)
+            {
                 dashTime = 0.0f;
                 anim.SetBool("horizontal", false);
             }
-            else if (horizontalInput > 0 && prevHorizontal < 0) {
+            else if (horizontalInput > 0 && prevHorizontal < 0)
+            {
                 dashTime = 0.0f;
             }
-            else if (horizontalInput < 0 && prevHorizontal > 0) {
+            else if (horizontalInput < 0 && prevHorizontal > 0)
+            {
                 dashTime = 0.0f;
             }
             prevHorizontal = horizontalInput;
 
             xSpeed *= dashCurve.Evaluate(dashTime);
 
-            if (isJumpStart && jumpCount < 1 && jumpTime < jumpTimeLimit) {
+            if (isJumpStart && jumpCount < 1 && jumpTime < jumpTimeLimit)
+            {
                 jumpTime += Time.deltaTime;
                 ySpeed = jumpForce * jumpCurve.Evaluate(jumpTime);
                 ++jumpCount;
             }
-            else if (!isJumpStart && isJump && jumpTime < jumpTimeLimit) {
+            else if (!isJumpStart && isJump && jumpTime < jumpTimeLimit)
+            {
                 jumpTime += Time.deltaTime;
                 ySpeed = jumpForce * jumpCurve.Evaluate(jumpTime);
             }
-            else {
+            else
+            {
                 ySpeed = -gravity;
             }
-            if (!jumpFinish) {
+            if (!jumpFinish)
+            {
                 jumpFinish = isJumpFin;
             }
 
-            int layer_mask = LayerMask.GetMask(new string[]{"Default"});
+            int layer_mask = LayerMask.GetMask(new string[] { "Default" });
             RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position, -(Vector2)Vector3.up, 3.5f, layer_mask);
             // Debug.DrawRay((Vector2)transform.position, -(Vector2)Vector3.up * 3.5f, Color.red, 100.0f,false);
-            if (hit.collider) {
-                if (jumpFinish) {
+            if (hit.collider)
+            {
+                if (jumpFinish)
+                {
                     jumpTime = 0;
                     jumpCount = 0;
                     jumpFinish = false;
@@ -128,29 +141,33 @@ public class PlayerCtr : MonoBehaviour
                 moveSpeed = defaultSpeed;
                 anim.SetBool("jump", false);
             }
-            else {
+            else
+            {
                 anim.SetBool("jump", true);
             }
 
             rbody2D.velocity = new Vector3(xSpeed, ySpeed);
         }
-        else if (camZoomStart) {
+        else if (camZoomStart)
+        {
             zoomingTime += Time.deltaTime;
             Vector3 srcPos = new Vector3(transform.position.x, transform.position.y, -10.0f);
-            cam.orthographicSize = Mathf.Lerp(camZoomSize, camDefaultSize, zoomingTime/zoomEndTime);
-            cam.transform.position = Vector3.Lerp(srcPos, camDefaultPos, zoomingTime/zoomEndTime);
+            cam.orthographicSize = Mathf.Lerp(camZoomSize, camDefaultSize, zoomingTime / zoomEndTime);
+            cam.transform.position = Vector3.Lerp(srcPos, camDefaultPos, zoomingTime / zoomEndTime);
             rbody2D.velocity = new Vector3(0.0f, 0.0f);
             anim.enabled = false;
         }
     }
 
-    public bool IsZoomIn() {
+    public bool IsZoomIn()
+    {
         return camZoomIn;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Goal") && keyGet) {
+        if (other.gameObject.CompareTag("Goal") && keyGet)
+        {
             // Send Analytics when game ends
             metricManager.EndRun();
             string result = metricManager.GetResult();
@@ -160,14 +177,17 @@ public class PlayerCtr : MonoBehaviour
             st.SetLevels(curLevel, nextLevel);
             st.LoadScene();
         }
-        else if (other.gameObject.CompareTag("Key")) {
+        else if (other.gameObject.CompareTag("Key"))
+        {
             keyGet = true;
             Destroy(other.gameObject);
         }
     }
 
-    private void OnCollisionStay2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Obstacle")) {
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
             Debug.Log("Collide");
             // rbody2D.velocity = new Vector3(-100, 0);
             transform.position -= new Vector3(1.0f, 0.0f, 0.0f);
@@ -175,7 +195,7 @@ public class PlayerCtr : MonoBehaviour
     }
 
     // Send the analytics to the google form
-        IEnumerator GetRequest(string uri)
+    IEnumerator GetRequest(string uri)
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
         {
