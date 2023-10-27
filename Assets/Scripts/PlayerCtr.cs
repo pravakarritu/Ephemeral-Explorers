@@ -184,12 +184,15 @@ public class PlayerCtr : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Goal") && keyGet)
         {
+
+            Debug.Log(curLevel);
             // Send Analytics when game ends
             metricManager.EndRun();
-            string result = metricManager.GetResult();
+            string result = metricManager.GetResult(curLevel);
             StartCoroutine(GetRequest(result));
 
             SceneTransition st = GetComponent<SceneTransition>();
+            metricManager.StartRun();
             st.SetLevels(curLevel, nextLevel);
             st.LoadScene();
         }
