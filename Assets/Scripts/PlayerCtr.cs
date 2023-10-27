@@ -210,6 +210,12 @@ public class PlayerCtr : MonoBehaviour
         }
     }
 
+    // Get keyGet value
+    public bool GetKeyGet()
+    {
+        return keyGet;
+    }
+
     // Send the analytics to the google form
     IEnumerator GetRequest(string uri)
     {
