@@ -22,6 +22,7 @@ public class PlayerCtr : MonoBehaviour
     private int jumpCount;
     private bool jumpFinish;
     private bool keyGet = false;
+
     private Vector3 velocity = Vector3.zero;
 
     private Rigidbody2D rbody2D;
@@ -32,6 +33,12 @@ public class PlayerCtr : MonoBehaviour
 
     // Metric Manager 
     private MetricManager metricManager;
+
+
+    // diminishSize
+    private bool diminishPowerGet = false;
+    private bool revocerSizePowerGet = false;
+
 
     void Start()
     {
@@ -47,6 +54,9 @@ public class PlayerCtr : MonoBehaviour
         jumpTime = 0.0f;
         jumpTimeLimit = 0.3f;
         jumpFinish = true;
+
+        diminishPowerGet = false;
+        revocerSizePowerGet = false;
 
         playerAnim = transform.GetChild(0).gameObject;
         anim = playerAnim.GetComponent<Animator>();
@@ -182,6 +192,7 @@ public class PlayerCtr : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+
         if (other.gameObject.CompareTag("Goal") && keyGet)
         {
 
@@ -201,6 +212,21 @@ public class PlayerCtr : MonoBehaviour
             keyGet = true;
             Destroy(other.gameObject);
         }
+        else if (other.gameObject.CompareTag("DiminishPower"))
+        {
+            diminishPowerGet = true;
+
+            Debug.Log("getPower");
+            transform.localScale = transform.localScale * 0.5f; // Reduce the player's size by half
+            Destroy(other.gameObject); // Destroy the power object
+        }
+        else if (other.gameObject.CompareTag("BackSizePower"))
+        {
+            revocerSizePowerGet = true;
+            
+            transform.localScale = transform.localScale * 2.0f; // Reduce the player's size by half
+            Destroy(other.gameObject); // Destroy the power object
+        }
     }
 
     private void OnCollisionStay2D(Collision2D other)
@@ -213,11 +239,31 @@ public class PlayerCtr : MonoBehaviour
         }
     }
 
+
+    // diminish size
+
+    // private void HandleDiminishPower(Collision2D other)
+    // {
+    //     if (other.gameObject.CompareTag("DiminishPower"))
+    //     {
+    //         diminishPowerGet = true;
+
+    //         Debug.Log("getPower");
+    //         transform.localScale = transform.localScale * 0.5f; // Reduce the player's size by half
+    //         Destroy(other.gameObject); // Destroy the power object
+    //     }
+    // }
+
+
+
     // Get keyGet value
     public bool GetKeyGet()
     {
         return keyGet;
     }
+
+
+    
 
     // Send the analytics to the google form
     IEnumerator GetRequest(string uri)
