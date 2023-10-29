@@ -38,7 +38,9 @@ public class PlayerCtr : MonoBehaviour
     // diminishSize
     private bool diminishPowerGet = false;
     private bool revocerSizePowerGet = false;
+    private int keyCount=0;
 
+    private string currentScene;
 
     void Start()
     {
@@ -209,8 +211,47 @@ public class PlayerCtr : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Key"))
         {
-            keyGet = true;
-            Destroy(other.gameObject);
+            currentScene = SceneManager.GetActiveScene().name;
+            if ((currentScene == "Level4") || (currentScene=="Level5"))
+            {  if(keyCount==0)
+                {
+                    keyCount += 1;
+                Destroy(other.gameObject);
+                }
+                else
+                {
+                    keyGet = true;
+                    Destroy(other.gameObject);
+                }
+                
+               
+
+            }
+            else if (currentScene=="Level6")
+            {
+                if (keyCount == 0)
+                {
+                    keyCount = 1;
+                    Destroy(other.gameObject);
+                }
+                else if (keyCount == 1)
+                {
+                    keyCount = 2;
+                    Destroy(other.gameObject);
+                }
+                else if (keyCount == 2)
+                {
+                    keyGet = true;
+                    Destroy(other.gameObject);
+                }
+
+            }
+            else
+            {
+                keyGet = true;
+                Destroy(other.gameObject);
+            }
+            
         }
         else if (other.gameObject.CompareTag("DiminishPower"))
         {
