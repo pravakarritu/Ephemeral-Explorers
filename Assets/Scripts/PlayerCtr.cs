@@ -41,8 +41,13 @@ public class PlayerCtr : MonoBehaviour
     private int keyCount=0;
 
     private string currentScene;
+   
 
-    void Start()
+
+    
+
+
+void Start()
     {
         camDefaultSize = cam.orthographicSize;
         camDefaultPos = cam.transform.position;
@@ -65,6 +70,10 @@ public class PlayerCtr : MonoBehaviour
 
         // Metric Manager Initialization
         metricManager = FindObjectOfType<MetricManager>();
+        
+
+
+
     }
 
     void FixedUpdate()
@@ -185,6 +194,24 @@ public class PlayerCtr : MonoBehaviour
             rbody2D.velocity = new Vector3(0.0f, 0.0f);
             anim.enabled = false;
         }
+
+        curLevel = SceneManager.GetActiveScene().name;
+        if (curLevel == "Level1")
+        {
+            nextLevel = "Level2";
+        }
+        else if (curLevel == "Level2")
+        {
+            nextLevel = "Level3";
+        }
+        else if (curLevel == "Level3")
+        {
+            nextLevel = "Level4";
+        }
+        else if (curLevel == "Level4")
+        {
+            nextLevel = "Level5";
+        }
     }
 
     public bool IsZoomIn()
@@ -206,6 +233,7 @@ public class PlayerCtr : MonoBehaviour
 
             SceneTransition st = GetComponent<SceneTransition>();
             metricManager.StartRun();
+            
             st.SetLevels(curLevel, nextLevel);
             st.LoadScene();
         }

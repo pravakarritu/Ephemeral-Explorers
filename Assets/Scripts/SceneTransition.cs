@@ -32,7 +32,7 @@ public class SceneTransition : MonoBehaviour
     }
 
     public void Retry()
-    {
+    {  
         SceneTransition st = GameObject.FindWithTag("Player").GetComponent<SceneTransition>();
         SceneManager.LoadScene(st.m_curLevel);
     }
