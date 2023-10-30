@@ -17,8 +17,6 @@ public class PlayerCtr : MonoBehaviour
     public AnimationCurve dashCurve;
     public AnimationCurve jumpCurve;
 
-    public int numberOfJumpsSuccess;
-
     private float horizontalInput, prevHorizontal, dashTime, jumpTime, jumpTimeLimit;
     public float moveSpeed = 10, jumpForce = 250, defaultSpeed, gravity;
     private int jumpCount;
@@ -35,6 +33,13 @@ public class PlayerCtr : MonoBehaviour
 
     // Metric Manager 
     private MetricManager metricManager;
+
+    private BoxManager boxManager;
+    
+    private int numberOfBoxMovements = 0;
+    
+    public int numberOfJumpsSuccess;
+
 
     // diminishSize
     private bool diminishPowerGet = false;
@@ -68,10 +73,7 @@ void Start()
 
         // Metric Manager Initialization
         metricManager = FindObjectOfType<MetricManager>();
-        
-
-
-
+        boxManager = FindObjectOfType<BoxManager>();
     }
 
     void FixedUpdate()
@@ -225,11 +227,11 @@ void Start()
 
         if (other.gameObject.CompareTag("Goal") && keyGet)
         {
-            // Send Analytics when game ends
-            Debug.Log("Number of Jumps Success");
-            Debug.Log(numberOfJumpsSuccess);
+            // Send Analytics when each level in the game ends
+
+            numberOfBoxMovements = boxManager.sendNumberOfBoxMovements();
             metricManager.EndRun();
-            string result = metricManager.GetResult(curLevel, numberOfJumpsSuccess );
+            string result = metricManager.GetResult(curLevel, numberOfJumpsSuccess, numberOfBoxMovements );
             StartCoroutine(GetRequest(result));
 
             SceneTransition st = GetComponent<SceneTransition>();

@@ -166,6 +166,7 @@ MonoBehaviour:
   jumpForce: 200
   defaultSpeed: 0
   gravity: 35
+  numberOfJumpsSuccess: 0
 --- !u!50 &8556293815611484558
 Rigidbody2D:
   serializedVersion: 4

@@ -25,8 +25,14 @@ public class BoxManager : MonoBehaviour
 
     public TextMeshProUGUI player_movement_control, screen_control, screen_select;
 
+
+    // Number of Box Movements - Analytics
+    public int numberOfBoxMovements = 0;
+
     void Start()
     {
+
+        // numberOfBoxMovements = 0;
         // Initialize memory for boxMap row
         Array.Resize(ref boxMap, boxRow);
         for (int i = 0; i < boxRow; ++i)
@@ -101,6 +107,8 @@ public class BoxManager : MonoBehaviour
                 }
                 // Update the emptyMapIndex to the right box
                 emptyMapIndex += 1;
+
+                Debug.Log(++numberOfBoxMovements);
             }
             else if (right && col != 0)
             {
@@ -116,6 +124,7 @@ public class BoxManager : MonoBehaviour
                     playerMapIndex += 1;
                 }
                 emptyMapIndex -= 1;
+                Debug.Log(++numberOfBoxMovements);
             }
             else if (down && row != 0)
             {
@@ -131,6 +140,7 @@ public class BoxManager : MonoBehaviour
                     playerMapIndex += boxCol;
                 }
                 emptyMapIndex -= boxCol;
+                Debug.Log(++numberOfBoxMovements);
             }
             else if (up && row != boxRow - 1)
             {
@@ -146,6 +156,7 @@ public class BoxManager : MonoBehaviour
                     playerMapIndex -= boxCol;
                 }
                 emptyMapIndex += boxCol;
+                Debug.Log(++numberOfBoxMovements);
             }
         }
 
@@ -254,5 +265,9 @@ public class BoxManager : MonoBehaviour
                 st.LoadScene();
             }
         }
+    }
+
+    public int sendNumberOfBoxMovements (){
+        return numberOfBoxMovements;
     }
 }
