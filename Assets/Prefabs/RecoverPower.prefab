@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 2710602507042988614}
   m_Layer: 0
   m_Name: RecoverPower
-  m_TagString: BackSizePower
+  m_TagString: DiminishPower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
