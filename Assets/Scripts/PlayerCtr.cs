@@ -17,6 +17,8 @@ public class PlayerCtr : MonoBehaviour
     public AnimationCurve dashCurve;
     public AnimationCurve jumpCurve;
 
+    public int numberOfJumpsSuccess;
+
     private float horizontalInput, prevHorizontal, dashTime, jumpTime, jumpTimeLimit;
     public float moveSpeed = 10, jumpForce = 250, defaultSpeed, gravity;
     private int jumpCount;
@@ -34,7 +36,6 @@ public class PlayerCtr : MonoBehaviour
     // Metric Manager 
     private MetricManager metricManager;
 
-
     // diminishSize
     private bool diminishPowerGet = false;
     private bool revocerSizePowerGet = false;
@@ -42,10 +43,6 @@ public class PlayerCtr : MonoBehaviour
 
     private string currentScene;
    
-
-
-    
-
 
 void Start()
     {
@@ -61,6 +58,7 @@ void Start()
         jumpTime = 0.0f;
         jumpTimeLimit = 0.3f;
         jumpFinish = true;
+        numberOfJumpsSuccess = 0;
 
         diminishPowerGet = false;
         revocerSizePowerGet = false;
@@ -149,6 +147,9 @@ void Start()
                 jumpTime += Time.deltaTime;
                 ySpeed = jumpForce * jumpCurve.Evaluate(jumpTime);
                 ++jumpCount;
+
+                // Analytics for number of Jumps
+                ++numberOfJumpsSuccess;
             }
             else if (!isJumpStart && isJump && jumpTime < jumpTimeLimit)
             {
@@ -224,11 +225,11 @@ void Start()
 
         if (other.gameObject.CompareTag("Goal") && keyGet)
         {
-
-            Debug.Log(curLevel);
             // Send Analytics when game ends
+            Debug.Log("Number of Jumps Success");
+            Debug.Log(numberOfJumpsSuccess);
             metricManager.EndRun();
-            string result = metricManager.GetResult(curLevel);
+            string result = metricManager.GetResult(curLevel, numberOfJumpsSuccess );
             StartCoroutine(GetRequest(result));
 
             SceneTransition st = GetComponent<SceneTransition>();
@@ -251,9 +252,6 @@ void Start()
                     keyGet = true;
                     Destroy(other.gameObject);
                 }
-                
-               
-
             }
             else if (currentScene=="Level6")
             {

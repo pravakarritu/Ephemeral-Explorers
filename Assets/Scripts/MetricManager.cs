@@ -26,11 +26,11 @@ public class MetricManager : MonoBehaviour
         stopWatch.Stop();
     }
 
-    public string GetResult( string currentLevel){
+    public string GetResult( string currentLevel, int numberOfJumpsSuccess){
 
     float playTime = (float)stopWatch.Elapsed.TotalMinutes;
 
-    UnityEngine.Debug.Log($"Current level: {currentLevel}");
+    // UnityEngine.Debug.Log($"Current level: {currentLevel}");
 
     float level1 = 0.0f;
     float level2 = 0.0f;
@@ -60,13 +60,16 @@ public class MetricManager : MonoBehaviour
     }
 
 
-    UnityEngine.Debug.Log($"Level 1: {level1}");
-    UnityEngine.Debug.Log($"Level 2: {level2}");
-    UnityEngine.Debug.Log($"Level 3: {level3}");
-    UnityEngine.Debug.Log($"Level 4: {level4}");
-    UnityEngine.Debug.Log($"Level 5: {level5}");
+    // UnityEngine.Debug.Log($"Level 1: {level1}");
+    // UnityEngine.Debug.Log($"Level 2: {level2}");
+    // UnityEngine.Debug.Log($"Level 3: {level3}");
+    // UnityEngine.Debug.Log($"Level 4: {level4}");
+    // UnityEngine.Debug.Log($"Level 5: {level5}");
 
-    string result = string.Format("https://docs.google.com/forms/d/e/1FAIpQLSdGjXOFO-4U50HRFrV0JlfMlTVqFL7456SmMlCHmBClU1rlzg/formResponse?entry.2075213155={0:0.00}&entry.1334567754={1:0.00}&entry.830705189={2:0.00}&entry.929535121={3:0.00}&entry.1300638476={4:0.00}", level1, level2,level3,level4,level5);
+    UnityEngine.Debug.Log($"Level 5: {numberOfJumpsSuccess}");
+
+    // string result = string.Format("https://docs.google.com/forms/d/e/1FAIpQLSdGjXOFO-4U50HRFrV0JlfMlTVqFL7456SmMlCHmBClU1rlzg/formResponse?entry.2075213155={0:0.00}&entry.1334567754={1:0.00}&entry.830705189={2:0.00}&entry.929535121={3:0.00}&entry.1300638476={4:0.00}", level1, level2,level3,level4,level5);
+    string result = string.Format("https://docs.google.com/forms/d/e/1FAIpQLSdGjXOFO-4U50HRFrV0JlfMlTVqFL7456SmMlCHmBClU1rlzg/formResponse?entry.1727223128={0}&entry.2075213155={1:0.00}&entry.1334567754={2:0.00}&entry.830705189={3:0.00}&entry.929535121={4:0.00}&entry.1300638476={5:0.00}&fbzx=2384544029218883711", numberOfJumpsSuccess, level1, level2,level3,level4,level5);
     return result;
         
     }
