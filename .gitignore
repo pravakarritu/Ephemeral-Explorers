@@ -75,5 +75,6 @@ crashlytics-build.properties
 Temp
 .vscode
 WebGL Build
+WebGL Builds
 connectwebgl.zip
 webgl_sharing
