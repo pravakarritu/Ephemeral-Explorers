@@ -242,7 +242,7 @@ public class PlayerCtr : MonoBehaviour
         else if (other.gameObject.CompareTag("Key"))
         {
             currentScene = SceneManager.GetActiveScene().name;
-            if ((currentScene == "Level3") || (currentScene == "Level4"))
+            if ((currentScene == "Level3") || (currentScene == "Level4") || (currentScene == "Level6"))
             {
                 if (keyCount == 0)
                 {
