@@ -2094,7 +2094,7 @@ PrefabInstance:
       objectReference: {fileID: 1906823976}
     - target: {fileID: 8467371806042780018, guid: f4344e9e262af4e73b7036067a1ffd57, type: 3}
       propertyPath: curLevel
-      value: Level3
+      value: Tutorial
       objectReference: {fileID: 0}
     - target: {fileID: 8467371806042780018, guid: f4344e9e262af4e73b7036067a1ffd57, type: 3}
       propertyPath: nextLevel
@@ -6489,6 +6489,7 @@ MonoBehaviour:
   player_movement_control: {fileID: 0}
   screen_control: {fileID: 0}
   screen_select: {fileID: 0}
+  numberOfBoxMovements: 0
 --- !u!114 &2133825682
 MonoBehaviour:
   m_ObjectHideFlags: 0
