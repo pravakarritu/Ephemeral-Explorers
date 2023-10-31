@@ -11,7 +11,7 @@ public class PlayerCtr : MonoBehaviour
     private Vector3 camDefaultPos;
     private float camDefaultSize, zoomingTime;
     private bool camZoomIn, camZoomStart;
-    private float camZoomSize = 25.0f, zoomEndTime = 0.4f;
+    private float camZoomSize = 25.0f, zoomEndTime = 0.5f;
 
     public string curLevel = "Level1", nextLevel = "Level2";
     public AnimationCurve dashCurve;
@@ -35,21 +35,21 @@ public class PlayerCtr : MonoBehaviour
     private MetricManager metricManager;
 
     private BoxManager boxManager;
-    
+
     private int numberOfBoxMovements = 0;
-    
+
     public int numberOfJumpsSuccess;
 
 
     // diminishSize
     private bool diminishPowerGet = false;
     private bool revocerSizePowerGet = false;
-    private int keyCount=0;
+    private int keyCount = 0;
 
     private string currentScene;
-   
 
-void Start()
+
+    void Start()
     {
         camDefaultSize = cam.orthographicSize;
         camDefaultPos = cam.transform.position;
@@ -82,6 +82,7 @@ void Start()
         if (camZoomIn && camZoomStart)
         {
             Vector3 destPos = new Vector3(transform.position.x, transform.position.y, -10.0f);
+            cam.orthographicSize = Mathf.Lerp(camDefaultSize, camZoomSize, zoomingTime / zoomEndTime);
             // Transform camera position using smooth damp
             cam.transform.position = Vector3.SmoothDamp(cam.transform.position, destPos, ref velocity, 0.2f);
         }
@@ -103,8 +104,6 @@ void Start()
         {
             // Smoothly zoom in the camera
             zoomingTime += Time.deltaTime;
-            cam.orthographicSize = Mathf.Lerp(camDefaultSize, camZoomSize, zoomingTime / zoomEndTime);
-            // cam.transform.position = Vector3.Lerp(camDefaultPos, destPos, zoomingTime / zoomEndTime);
             anim.enabled = true;
 
             // Get player movement input
@@ -231,23 +230,24 @@ void Start()
 
             numberOfBoxMovements = boxManager.sendNumberOfBoxMovements();
             metricManager.EndRun();
-            string result = metricManager.GetResult(curLevel, numberOfJumpsSuccess, numberOfBoxMovements );
+            string result = metricManager.GetResult(curLevel, numberOfJumpsSuccess, numberOfBoxMovements);
             StartCoroutine(GetRequest(result));
 
             SceneTransition st = GetComponent<SceneTransition>();
             metricManager.StartRun();
-            
+
             st.SetLevels(curLevel, nextLevel);
             st.LoadScene();
         }
         else if (other.gameObject.CompareTag("Key"))
         {
             currentScene = SceneManager.GetActiveScene().name;
-            if ((currentScene == "Level4") || (currentScene=="Level5"))
-            {  if(keyCount==0)
+            if ((currentScene == "Level4") || (currentScene == "Level5"))
+            {
+                if (keyCount == 0)
                 {
                     keyCount += 1;
-                Destroy(other.gameObject);
+                    Destroy(other.gameObject);
                 }
                 else
                 {
@@ -255,7 +255,7 @@ void Start()
                     Destroy(other.gameObject);
                 }
             }
-            else if (currentScene=="Level6")
+            else if (currentScene == "Level6")
             {
                 if (keyCount == 0)
                 {
@@ -279,7 +279,7 @@ void Start()
                 keyGet = true;
                 Destroy(other.gameObject);
             }
-            
+
         }
         else if (other.gameObject.CompareTag("DiminishPower"))
         {
@@ -292,7 +292,7 @@ void Start()
         else if (other.gameObject.CompareTag("BackSizePower"))
         {
             revocerSizePowerGet = true;
-            
+
             transform.localScale = transform.localScale * 2.0f; // Reduce the player's size by half
             Destroy(other.gameObject); // Destroy the power object
         }
@@ -332,7 +332,7 @@ void Start()
     }
 
 
-    
+
 
     // Send the analytics to the google form
     IEnumerator GetRequest(string uri)
