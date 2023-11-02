@@ -13,6 +13,9 @@ TagManager:
   - NextButton
   - RetryButton
   - Obstacle
+  - BackSizePower
+  - DiminishPower
+  - enemy
   layers:
   - Default
   - TransparentFX
