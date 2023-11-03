@@ -14,6 +14,15 @@ public class SceneTransition : MonoBehaviour
 
     public void LoadScene()
     {
+
+        // Add delay of falling, before gameover
+        if (sceneToLoad == "GameOver")
+    {
+        // Wait for 2 seconds before loading the GameOver scene
+        Invoke("DelayedLoadScene", 1.5f);
+    }else{
+
+    
         // Adds a method called transitSceneEnv as a listener to the SceneManager.sceneLoaded event 
         // This event is triggered when a new scene is loaded and allows the script to perform actions 
         // after the scene has finished loading.
@@ -21,6 +30,16 @@ public class SceneTransition : MonoBehaviour
         // When the new scene is loaded, the transitSceneEnv method is called
         SceneManager.LoadScene(sceneToLoad);
     }
+    }
+
+    private void DelayedLoadScene()
+{
+    // Adds a method called transitSceneEnv as a listener to the SceneManager.sceneLoaded event
+    SceneManager.sceneLoaded += transitSceneEnv;
+
+    // Load the GameOver scene
+    SceneManager.LoadScene(sceneToLoad);
+}
 
     private void transitSceneEnv(Scene next, LoadSceneMode mode)
     {
