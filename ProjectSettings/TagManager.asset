@@ -16,6 +16,8 @@ TagManager:
   - BackSizePower
   - DiminishPower
   - enemy
+  - Elevator
+  - KeyGuards
   layers:
   - Default
   - TransparentFX

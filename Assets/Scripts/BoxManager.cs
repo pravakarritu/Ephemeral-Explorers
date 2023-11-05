@@ -14,7 +14,7 @@ public class BoxManager : MonoBehaviour
     public GameObject[] box, frame;
     private int[][] boxMap; // index: position index , value: index of box located at the position
 
-    private GameObject player, key, elevator;
+    private GameObject player, key, keyGuards;
     PlayerCtr playerCtr;
 
     private int playerMapIndex, emptyMapIndex;
@@ -56,8 +56,8 @@ public class BoxManager : MonoBehaviour
         emptyMapIndex = emptyBoxIndex;
         // Find Key object
         key = GameObject.FindWithTag("Key");
-        // Find Elevator object
-        elevator = GameObject.FindWithTag("Elevator");
+        // Find Key object
+        keyGuards = GameObject.FindWithTag("KeyGuards");
     }
 
     void Update()
@@ -74,6 +74,8 @@ public class BoxManager : MonoBehaviour
                 keyPos = key.transform.position;
                 keyRotation = key.transform.rotation;
             }
+            Vector3 keyGuardsPos = keyGuards.transform.position;
+            Quaternion keyGuardsRotation = keyGuards.transform.rotation;
             // Get row and col of player
             int r_row = playerMapIndex / boxCol;
             int r_col = playerMapIndex - boxCol * r_row;
@@ -84,7 +86,8 @@ public class BoxManager : MonoBehaviour
                 key.transform.position = keyPos;
                 key.transform.rotation = keyRotation;
             }
-            // key.transform.Rotate(Vector3.forward * 90);
+            keyGuards.transform.position = keyGuardsPos;
+            keyGuards.transform.rotation = keyGuardsRotation;
         }
         // Box controls work only when we are zoomed out
         if (!playerCtr.IsZoomIn())

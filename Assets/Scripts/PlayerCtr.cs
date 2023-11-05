@@ -25,10 +25,10 @@ public class PlayerCtr : MonoBehaviour
 
     private Vector3 velocity = Vector3.zero;
 
-    private Rigidbody2D rbody2D;
+    private Rigidbody2D rbody2D, elevatorRBody;
     float xSpeed, ySpeed;
 
-    private GameObject playerAnim;
+    private GameObject playerAnim, elevator;
     private Animator anim;
 
     // Metric Manager 
@@ -74,6 +74,10 @@ public class PlayerCtr : MonoBehaviour
         // Metric Manager Initialization
         metricManager = FindObjectOfType<MetricManager>();
         boxManager = FindObjectOfType<BoxManager>();
+
+        // Find Elevator object
+        elevator = GameObject.FindWithTag("Elevator");
+        elevatorRBody = elevator.GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()
@@ -179,10 +183,20 @@ public class PlayerCtr : MonoBehaviour
                 }
                 moveSpeed = defaultSpeed;
                 anim.SetBool("jump", false);
+
+                if (hit.collider.CompareTag("Elevator")) {
+                    // elevator.transform.position += 50 * transform.up * Time.deltaTime;
+                    elevatorRBody.velocity = 10 * transform.up;
+                }
+                else
+                {
+                    elevatorRBody.velocity = new Vector3(0.0f, 0.0f);
+                }
             }
             else
             {
                 anim.SetBool("jump", true);
+                elevatorRBody.velocity = new Vector3(0.0f, 0.0f);
             }
 
             rbody2D.velocity = new Vector3(xSpeed, ySpeed);
