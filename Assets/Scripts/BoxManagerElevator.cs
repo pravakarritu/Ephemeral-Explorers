@@ -7,15 +7,15 @@ using TMPro;
 
 using UnityEngine.SceneManagement;
 
-public class BoxManager : MonoBehaviour
+public class BoxManagerElevator : MonoBehaviour
 {
     // Initialize the below values in unity editor
     public int boxNum, boxRow, boxCol, emptyBoxIndex;
     public GameObject[] box, frame;
     private int[][] boxMap; // index: position index , value: index of box located at the position
 
-    private GameObject player;
-    PlayerCtr playerCtr;
+    private GameObject player, key, keyGuards;
+    PlayerCtrElevator playerCtr;
 
     private int playerMapIndex, emptyMapIndex;
 
@@ -49,11 +49,15 @@ public class BoxManager : MonoBehaviour
         // Find player object
         player = GameObject.FindWithTag("Player");
         // Get PlayerCtr script
-        playerCtr = player.GetComponent<PlayerCtr>();
+        playerCtr = player.GetComponent<PlayerCtrElevator>();
         // Player is always in first box
         playerMapIndex = 0;
         // Get the empty box value set in unity editor
         emptyMapIndex = emptyBoxIndex;
+        // Find Key object
+        key = GameObject.FindWithTag("Key");
+        // Find Key object
+        keyGuards = GameObject.FindWithTag("KeyGuards");
     }
 
     void Update()
@@ -63,14 +67,28 @@ public class BoxManager : MonoBehaviour
         // Rotate the box and player if user presses right shift key
         if (rotate)
         {
+            bool isKeyGet = playerCtr.GetKeyGet();
+            Vector3 keyPos = new Vector3();
+            Quaternion keyRotation = new Quaternion();
+            if (!isKeyGet) {
+                keyPos = key.transform.position;
+                keyRotation = key.transform.rotation;
+            }
+            Vector3 keyGuardsPos = keyGuards.transform.position;
+            Quaternion keyGuardsRotation = keyGuards.transform.rotation;
             // Get row and col of player
             int r_row = playerMapIndex / boxCol;
             int r_col = playerMapIndex - boxCol * r_row;
             // Rotate the box and player
             box[boxMap[r_row][r_col]].transform.Rotate(Vector3.forward * -90);
             player.transform.Rotate(Vector3.forward * 90);
+            if (!isKeyGet) {
+                key.transform.position = keyPos;
+                key.transform.rotation = keyRotation;
+            }
+            keyGuards.transform.position = keyGuardsPos;
+            keyGuards.transform.rotation = keyGuardsRotation;
         }
-
         // Box controls work only when we are zoomed out
         if (!playerCtr.IsZoomIn())
         {
