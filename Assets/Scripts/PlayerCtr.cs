@@ -241,45 +241,46 @@ public class PlayerCtr : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Key"))
         {
-            currentScene = SceneManager.GetActiveScene().name;
-            if ((currentScene == "Level3") || (currentScene == "Level4") || (currentScene == "Level6"))
-            {
-                if (keyCount == 0)
-                {
-                    keyCount += 1;
-                    Destroy(other.gameObject);
-                }
-                else
-                {
-                    keyGet = true;
-                    Destroy(other.gameObject);
-                }
-            }
-            else if (currentScene == "Level6")
-            {
-                if (keyCount == 0)
-                {
-                    keyCount = 1;
-                    Destroy(other.gameObject);
-                }
-                else if (keyCount == 1)
-                {
-                    keyCount = 2;
-                    Destroy(other.gameObject);
-                }
-                else if (keyCount == 2)
-                {
-                    keyGet = true;
-                    Destroy(other.gameObject);
-                }
+            keyGet = true;
+            Destroy(other.gameObject);
+            // currentScene = SceneManager.GetActiveScene().name;
+            // if ((currentScene == "Level3") || (currentScene == "Level4") || (currentScene == "Level6"))
+            // {
+            //     if (keyCount == 0)
+            //     {
+            //         keyCount += 1;
+            //         Destroy(other.gameObject);
+            //     }
+            //     else
+            //     {
+            //         keyGet = true;
+            //         Destroy(other.gameObject);
+            //     }
+            // }
+            // else if (currentScene == "Level6")
+            // {
+            //     if (keyCount == 0)
+            //     {
+            //         keyCount = 1;
+            //         Destroy(other.gameObject);
+            //     }
+            //     else if (keyCount == 1)
+            //     {
+            //         keyCount = 2;
+            //         Destroy(other.gameObject);
+            //     }
+            //     else if (keyCount == 2)
+            //     {
+            //         keyGet = true;
+            //         Destroy(other.gameObject);
+            //     }
 
-            }
-            else
-            {
-                keyGet = true;
-                Destroy(other.gameObject);
-            }
-
+            // }
+            // else
+            // {
+            //     keyGet = true;
+            //     Destroy(other.gameObject);
+            // }
         }
         else if (other.gameObject.CompareTag("DiminishPower"))
         {

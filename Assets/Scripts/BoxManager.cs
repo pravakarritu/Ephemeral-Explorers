@@ -14,7 +14,7 @@ public class BoxManager : MonoBehaviour
     public GameObject[] box, frame;
     private int[][] boxMap; // index: position index , value: index of box located at the position
 
-    private GameObject player;
+    private GameObject player, key, elevator;
     PlayerCtr playerCtr;
 
     private int playerMapIndex, emptyMapIndex;
@@ -54,26 +54,41 @@ public class BoxManager : MonoBehaviour
         playerMapIndex = 0;
         // Get the empty box value set in unity editor
         emptyMapIndex = emptyBoxIndex;
+        // Find Key object
+        key = GameObject.FindWithTag("Key");
+        // Find Elevator object
+        elevator = GameObject.FindWithTag("Elevator");
     }
 
     void Update()
     {
+        // Check if user presses right shift key
+        bool rotate = Input.GetKeyDown(KeyCode.RightShift);
+        // Rotate the box and player if user presses right shift key
+        if (rotate)
+        {
+            bool isKeyGet = playerCtr.GetKeyGet();
+            Vector3 keyPos = new Vector3();
+            Quaternion keyRotation = new Quaternion();
+            if (!isKeyGet) {
+                keyPos = key.transform.position;
+                keyRotation = key.transform.rotation;
+            }
+            // Get row and col of player
+            int r_row = playerMapIndex / boxCol;
+            int r_col = playerMapIndex - boxCol * r_row;
+            // Rotate the box and player
+            box[boxMap[r_row][r_col]].transform.Rotate(Vector3.forward * -90);
+            player.transform.Rotate(Vector3.forward * 90);
+            if (!isKeyGet) {
+                key.transform.position = keyPos;
+                key.transform.rotation = keyRotation;
+            }
+            // key.transform.Rotate(Vector3.forward * 90);
+        }
         // Box controls work only when we are zoomed out
         if (!playerCtr.IsZoomIn())
         {
-            // Check if user presses right shift key
-            bool rotate = Input.GetKeyDown(KeyCode.RightShift);
-            // Rotate the box and player if user presses right shift key
-            if (rotate)
-            {
-                // Get row and col of player
-                int r_row = playerMapIndex / boxCol;
-                int r_col = playerMapIndex - boxCol * r_row;
-                // Rotate the box and player
-                box[boxMap[r_row][r_col]].transform.Rotate(Vector3.forward * -90);
-                player.transform.Rotate(Vector3.forward * 90);
-            }
-
             // Get box movement input
             bool left = Input.GetKeyDown(KeyCode.LeftArrow);
             bool right = Input.GetKeyDown(KeyCode.RightArrow);
