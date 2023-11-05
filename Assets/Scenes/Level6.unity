@@ -1189,8 +1189,8 @@ GameObject:
   - component: {fileID: 679155134}
   - component: {fileID: 679155136}
   m_Layer: 0
-  m_Name: ConstantObj
-  m_TagString: Untagged
+  m_Name: Elevator
+  m_TagString: Elevator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1204,7 +1204,7 @@ Transform:
   m_GameObject: {fileID: 679155132}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 56.399994, y: -13.87, z: -0.6576257}
-  m_LocalScale: {x: 8.5, y: 8.5, z: 0}
+  m_LocalScale: {x: 8.5, y: 2, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2133825680}
@@ -1622,7 +1622,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8467371806042780018, guid: f4344e9e262af4e73b7036067a1ffd57, type: 3}
       propertyPath: jumpForce
-      value: 180
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467371806042780018, guid: f4344e9e262af4e73b7036067a1ffd57, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8467371806042780018, guid: f4344e9e262af4e73b7036067a1ffd57, type: 3}
       propertyPath: nextLevel
@@ -1682,6 +1686,83 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: LevelComplete
+--- !u!114 &712432724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712432713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05af3edd262ef49c1a80cdd93f059de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 1906823976}
+  curLevel: Level6
+  nextLevel: Level7
+  dashCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.2817722
+      value: 0.6375192
+      inSlope: 1.4990866
+      outSlope: 1.4990866
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jumpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.00015965087
+      value: 0.50205964
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.19933033
+      value: 0.1911487
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  moveSpeed: 29
+  jumpForce: 100
+  defaultSpeed: 0
+  gravity: 35
+  numberOfJumpsSuccess: 0
 --- !u!1 &725635566
 GameObject:
   m_ObjectHideFlags: 0
@@ -3648,7 +3729,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398986116}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0089999065, y: 0.20840001, z: 0}
+  m_LocalPosition: {x: 0.0089999065, y: 0.096, z: 0}
   m_LocalScale: {x: 0.22582996, y: 0.029737966, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3766,7 +3847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5661597300126030401, guid: 5d1dd4ea3223b429d9f5f860cff30b92, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.15
+      value: 0.03759999
       objectReference: {fileID: 0}
     - target: {fileID: 5661597300126030401, guid: 5d1dd4ea3223b429d9f5f860cff30b92, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5112,6 +5193,7 @@ GameObject:
   - component: {fileID: 2133825680}
   - component: {fileID: 2133825681}
   - component: {fileID: 2133825682}
+  - component: {fileID: 2133825683}
   m_Layer: 0
   m_Name: BoxManager
   m_TagString: Untagged
@@ -5146,7 +5228,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2133825679}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a8605a91a50f46afa618aeb21a534fe, type: 3}
   m_Name: 
@@ -5185,6 +5267,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: GameOver
+--- !u!114 &2133825683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133825679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7505dfc9739e141b5a7284fd9aabbce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxNum: 4
+  boxRow: 2
+  boxCol: 2
+  emptyBoxIndex: 3
+  box:
+  - {fileID: 583113353}
+  - {fileID: 8375385604241931435}
+  - {fileID: 1009672108}
+  - {fileID: 1508774167}
+  frame:
+  - {fileID: 583113352}
+  - {fileID: 8375385604241931434}
+  - {fileID: 1009672107}
+  - {fileID: 1508774167}
+  activeColor:
+    serializedVersion: 2
+    rgba: 4284809060
+  player_movement_control: {fileID: 0}
+  screen_control: {fileID: 0}
+  screen_select: {fileID: 0}
+  numberOfBoxMovements: 0
 --- !u!1001 &8375385604241931432
 PrefabInstance:
   m_ObjectHideFlags: 0
