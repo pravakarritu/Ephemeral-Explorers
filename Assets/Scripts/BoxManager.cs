@@ -58,6 +58,32 @@ public class BoxManager : MonoBehaviour
 
     void Update()
     {
+
+        // F to flip the box
+        // Check if the user presses the 'f' key
+        bool flipBox = Input.GetKeyDown(KeyCode.F);
+        // Flip the box if the user presses the 'f' key
+        if (flipBox)
+        {
+            Debug.Log("pressedF");
+            // Get row and col of player
+            int r_row = playerMapIndex / boxCol;
+            int r_col = playerMapIndex - boxCol * r_row;
+
+            // Store brefore player position
+            Vector3 playerWorldPosition = player.transform.position;
+            Transform playerParent = player.transform.parent;
+            player.transform.parent = null;
+
+            box[boxMap[r_row][r_col]].transform.Rotate(0, 180, 0, Space.World);
+
+            player.transform.parent = playerParent;
+
+            player.transform.position = playerWorldPosition;
+        }
+
+
+        
         // Check if user presses right shift key
         bool rotate = Input.GetKeyDown(KeyCode.RightShift);
         // Rotate the box and player if user presses right shift key
