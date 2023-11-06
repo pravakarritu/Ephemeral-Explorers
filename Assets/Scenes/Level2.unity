@@ -3517,24 +3517,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a8605a91a50f46afa618aeb21a534fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxNum: 6
+  boxNum: 4
   boxRow: 2
-  boxCol: 3
-  emptyBoxIndex: 4
+  boxCol: 2
+  emptyBoxIndex: 3
   box:
   - {fileID: 81524064}
   - {fileID: 750017765}
-  - {fileID: 0}
   - {fileID: 2129691059}
   - {fileID: 1515621193}
-  - {fileID: 0}
   frame:
   - {fileID: 2009296717}
   - {fileID: 1665802570}
-  - {fileID: 0}
   - {fileID: 1528965010}
   - {fileID: 1515621193}
-  - {fileID: 0}
   activeColor:
     serializedVersion: 2
     rgba: 4284809060

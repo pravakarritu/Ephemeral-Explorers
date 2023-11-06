@@ -143,16 +143,17 @@ public class PlayerCtr : MonoBehaviour
             xSpeed *= dashCurve.Evaluate(dashTime);
 
             // Allow the player to jump while the jump time is less than the limit
-            if (isJumpStart && jumpCount < 1 && jumpTime < jumpTimeLimit)
+            if (isJumpStart && jumpCount < 1 && !jumpFinish)
             {
                 jumpTime += Time.deltaTime;
                 ySpeed = jumpForce * jumpCurve.Evaluate(jumpTime);
                 ++jumpCount;
+                Debug.LogFormat("jumpstart");
 
                 // Analytics for number of Jumps
                 ++numberOfJumpsSuccess;
             }
-            else if (!isJumpStart && isJump && jumpTime < jumpTimeLimit)
+            else if (!isJumpStart && isJump && jumpTime < jumpTimeLimit && !jumpFinish)
             {
                 jumpTime += Time.deltaTime;
                 ySpeed = jumpForce * jumpCurve.Evaluate(jumpTime);

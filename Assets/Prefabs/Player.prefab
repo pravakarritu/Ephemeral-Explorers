@@ -163,7 +163,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   moveSpeed: 29
-  jumpForce: 200
+  jumpForce: 110
   defaultSpeed: 0
   gravity: 35
   numberOfJumpsSuccess: 0

@@ -3339,11 +3339,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8467371806042780018, guid: f4344e9e262af4e73b7036067a1ffd57, type: 3}
       propertyPath: jumpForce
-      value: 200
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 8467371806042780018, guid: f4344e9e262af4e73b7036067a1ffd57, type: 3}
       propertyPath: moveSpeed
-      value: 28.5
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 8467371806042780018, guid: f4344e9e262af4e73b7036067a1ffd57, type: 3}
       propertyPath: zoomEndTime
