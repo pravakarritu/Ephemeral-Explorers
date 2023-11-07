@@ -15,23 +15,21 @@ public class PlatformController : MonoBehaviour
 
         // When the game loads, one set of platforms appear and one set of platforms are not visible
         foreach (GameObject platform in platformSetA)
-            {
-                platform.SetActive(isVisibleA);
-            }
+        {
+            platform.SetActive(isVisibleA);
+        }
 
         foreach (GameObject platform in platformSetB)
-            {
-                platform.SetActive(isVisibleB);
-            }
+        {
+            platform.SetActive(isVisibleB);
+        }
     }
 
-    void Update()
+    void LateUpdate()
     {
+        // When the player presses the V key, the platforms switch visibility
         if (Input.GetKeyDown(KeyCode.V))
         {
-            isVisibleA = !isVisibleA;
-            isVisibleB = !isVisibleB;
-
             foreach (GameObject platform in platformSetA)
             {
                 platform.SetActive(isVisibleA);
@@ -41,6 +39,27 @@ public class PlatformController : MonoBehaviour
             {
                 platform.SetActive(isVisibleB);
             }
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            isVisibleA = !isVisibleA;
+            isVisibleB = !isVisibleB;
+            print("isVisibleA: " + isVisibleA);
+            print("isVisibleB: " + isVisibleB);
+
+            // foreach (GameObject platform in platformSetA)
+            // {
+            //     platform.SetActive(isVisibleA);
+            // }
+
+            // foreach (GameObject platform in platformSetB)
+            // {
+            //     platform.SetActive(isVisibleB);
+            // }
         }
     }
 }
