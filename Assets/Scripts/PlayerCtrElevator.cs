@@ -244,7 +244,7 @@ public class PlayerCtrElevator : MonoBehaviour
 
             numberOfBoxMovements = boxManager.sendNumberOfBoxMovements();
             metricManager.EndRun();
-            string result = metricManager.GetResult(curLevel, numberOfJumpsSuccess, numberOfBoxMovements);
+            string result = metricManager.GetResult(curLevel, numberOfJumpsSuccess, numberOfBoxMovements, diminishPowerGet);
             StartCoroutine(GetRequest(result));
 
             SceneTransition st = GetComponent<SceneTransition>();

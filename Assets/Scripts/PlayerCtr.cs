@@ -231,7 +231,7 @@ public class PlayerCtr : MonoBehaviour
 
             numberOfBoxMovements = boxManager.sendNumberOfBoxMovements();
             metricManager.EndRun();
-            string result = metricManager.GetResult(curLevel, numberOfJumpsSuccess, numberOfBoxMovements);
+            string result = metricManager.GetResult(curLevel, numberOfJumpsSuccess, numberOfBoxMovements, diminishPowerGet);
             StartCoroutine(GetRequest(result));
 
             SceneTransition st = GetComponent<SceneTransition>();
@@ -286,7 +286,7 @@ public class PlayerCtr : MonoBehaviour
         {
             diminishPowerGet = true;
 
-            Debug.Log("getPower");
+            Debug.Log("getPower PlayerCtrl");
             transform.localScale = transform.localScale * 0.5f; // Reduce the player's size by half
             Destroy(other.gameObject); // Destroy the power object
         }
