@@ -165,7 +165,7 @@ MonoBehaviour:
   moveSpeed: 29
   jumpForce: 110
   defaultSpeed: 0
-  gravity: 35
+  gravity: 30
   numberOfJumpsSuccess: 0
 --- !u!50 &8556293815611484558
 Rigidbody2D:
