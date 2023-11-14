@@ -2483,7 +2483,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 413.8, y: 69.6}
+  m_AnchoredPosition: {x: 376, y: 179}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1488374187
@@ -2510,9 +2510,9 @@ MonoBehaviour:
 
     Power Use
 
-    Small Star: diminish player size
+    diminishPower: diminish player size
 
-    Big Star:
+    recoverPower:
     recover player size'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2576,7 +2576,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -33.70604, y: -7.0547314, z: 28.930214, w: -44.71027}
+  m_margin: {x: -33.703278, y: -7.0547314, z: 28.930214, w: -44.71027}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
