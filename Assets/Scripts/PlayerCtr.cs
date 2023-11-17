@@ -49,6 +49,12 @@ public class PlayerCtr : MonoBehaviour
     private string currentScene;
 
 
+    // JumpHigher when dinimishPower Use
+    public float enhancedJumpForce = 260; 
+    private float originalJumpForce;
+
+
+
     void Start()
     {
         camDefaultSize = cam.orthographicSize;
@@ -64,6 +70,8 @@ public class PlayerCtr : MonoBehaviour
         jumpTimeLimit = 0.3f;
         jumpFinish = true;
         numberOfJumpsSuccess = 0;
+
+        originalJumpForce = jumpForce;
 
         diminishPowerGet = false;
         revocerSizePowerGet = false;
@@ -90,6 +98,8 @@ public class PlayerCtr : MonoBehaviour
 
     void Update()
     {
+
+
         // Check if space bar is pressed
         bool zoomInOut = Input.GetKeyDown(KeyCode.Space);
         if (zoomInOut)
@@ -285,15 +295,15 @@ public class PlayerCtr : MonoBehaviour
         else if (other.gameObject.CompareTag("DiminishPower"))
         {
             diminishPowerGet = true;
-
             Debug.Log("getPower PlayerCtrl");
+            jumpForce = enhancedJumpForce;  // JumpHigher
             transform.localScale = transform.localScale * 0.5f; // Reduce the player's size by half
             Destroy(other.gameObject); // Destroy the power object
         }
         else if (other.gameObject.CompareTag("BackSizePower"))
         {
+            jumpForce = originalJumpForce; // BackJumpForce
             revocerSizePowerGet = true;
-
             transform.localScale = transform.localScale * 2.0f; // Reduce the player's size by half
             Destroy(other.gameObject); // Destroy the power object
         }
