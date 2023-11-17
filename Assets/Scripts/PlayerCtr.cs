@@ -118,9 +118,12 @@ public class PlayerCtr : MonoBehaviour
 
             // Get player movement input
             horizontalInput = Input.GetAxis("Horizontal");
-            bool isJump = Input.GetKey(KeyCode.UpArrow);
-            bool isJumpStart = Input.GetKeyDown(KeyCode.UpArrow);
-            bool isJumpFin = Input.GetKeyUp(KeyCode.UpArrow);
+            
+
+            // Update for WASD
+            bool isJump = Input.GetKey(KeyCode.W);
+            bool isJumpStart = Input.GetKeyDown(KeyCode.W);
+            bool isJumpFin = Input.GetKeyUp(KeyCode.W);
 
             // Gradually increase/decrease the horizontal speed of the player
             xSpeed = horizontalInput * moveSpeed;
