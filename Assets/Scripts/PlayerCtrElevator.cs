@@ -17,10 +17,10 @@ public class PlayerCtrElevator : MonoBehaviour
     public AnimationCurve dashCurve;
     public AnimationCurve jumpCurve;
 
-    private float horizontalInput, prevHorizontal, dashTime, jumpTime, jumpTimeLimit;
+    private float horizontalInput, prevHorizontal, dashTime, jumpTime, jumpTimeLimit, elevatorUpTime, elevatorUpTimeLimit;
     public float moveSpeed = 10, jumpForce = 250, defaultSpeed, gravity;
     private int jumpCount;
-    private bool jumpFinish;
+    private bool jumpFinish, elevatorFinish;
     private bool keyGet = false;
 
     private Vector3 velocity = Vector3.zero;
@@ -63,6 +63,9 @@ public class PlayerCtrElevator : MonoBehaviour
         jumpTime = 0.0f;
         jumpTimeLimit = 0.3f;
         jumpFinish = true;
+        elevatorUpTime = 0;
+        elevatorUpTimeLimit = 1.0f;
+        elevatorFinish = true;
         numberOfJumpsSuccess = 0;
 
         diminishPowerGet = false;
@@ -184,19 +187,27 @@ public class PlayerCtrElevator : MonoBehaviour
                 moveSpeed = defaultSpeed;
                 anim.SetBool("jump", false);
 
-                if (hit.collider.CompareTag("Elevator")) {
+                if (hit.collider.CompareTag("Elevator") && elevatorUpTime < elevatorUpTimeLimit && elevatorFinish) {
                     // elevator.transform.position += 50 * transform.up * Time.deltaTime;
+                    elevatorUpTime += Time.deltaTime;
                     elevatorRBody.velocity = 10 * transform.up;
+                }
+                else if (elevatorUpTime > 0) {
+                    elevatorUpTime = elevatorUpTime - Time.deltaTime;
+                    elevatorFinish = false;
+                    elevatorRBody.velocity = -3 * transform.up;
                 }
                 else
                 {
+                    elevatorUpTime = 0;
+                    elevatorFinish = true;
                     elevatorRBody.velocity = new Vector3(0.0f, 0.0f);
                 }
             }
             else
             {
                 anim.SetBool("jump", true);
-                elevatorRBody.velocity = new Vector3(0.0f, 0.0f);
+                elevatorRBody.velocity = new Vector3(0.0f, -1.0f);
             }
 
             rbody2D.velocity = new Vector3(xSpeed, ySpeed);

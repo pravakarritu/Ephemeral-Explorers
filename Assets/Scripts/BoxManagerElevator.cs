@@ -74,8 +74,8 @@ public class BoxManagerElevator : MonoBehaviour
                 keyPos = key.transform.position;
                 keyRotation = key.transform.rotation;
             }
-            Vector3 keyGuardsPos = keyGuards.transform.position;
-            Quaternion keyGuardsRotation = keyGuards.transform.rotation;
+            // Vector3 keyGuardsPos = keyGuards.transform.position;
+            // Quaternion keyGuardsRotation = keyGuards.transform.rotation;
             // Get row and col of player
             int r_row = playerMapIndex / boxCol;
             int r_col = playerMapIndex - boxCol * r_row;
@@ -86,8 +86,8 @@ public class BoxManagerElevator : MonoBehaviour
                 key.transform.position = keyPos;
                 key.transform.rotation = keyRotation;
             }
-            keyGuards.transform.position = keyGuardsPos;
-            keyGuards.transform.rotation = keyGuardsRotation;
+            // keyGuards.transform.position = keyGuardsPos;
+            // keyGuards.transform.rotation = keyGuardsRotation;
         }
         // Box controls work only when we are zoomed out
         if (!playerCtr.IsZoomIn())
