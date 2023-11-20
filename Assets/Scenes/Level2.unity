@@ -1511,7 +1511,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 957216254}
-  - component: {fileID: 957216255}
   m_Layer: 0
   m_Name: platformSetA
   m_TagString: Untagged
@@ -1537,22 +1536,6 @@ Transform:
   m_Father: {fileID: 494944478}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &957216255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 957216253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c5a4c3954d5043cd8f1e0c552de3d91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  platformSetA:
-  - {fileID: 957216253}
-  platformSetB:
-  - {fileID: 1492157309}
 --- !u!1 &962197307
 GameObject:
   m_ObjectHideFlags: 0
@@ -2546,6 +2529,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!1 &1373323440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8375385604033289293, guid: 24243c04dd0c2427ca47c8c907c5dd8a, type: 3}
+  m_PrefabInstance: {fileID: 583113350}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1373323442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373323440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5a4c3954d5043cd8f1e0c552de3d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformSetA:
+  - {fileID: 957216253}
+  platformSetB:
+  - {fileID: 1492157309}
 --- !u!1 &1375756763
 GameObject:
   m_ObjectHideFlags: 0
@@ -2696,7 +2700,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1492157310}
-  - component: {fileID: 1492157311}
   m_Layer: 0
   m_Name: platformSetB
   m_TagString: Untagged
@@ -2721,22 +2724,6 @@ Transform:
   m_Father: {fileID: 494944478}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1492157311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492157309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c5a4c3954d5043cd8f1e0c552de3d91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  platformSetA:
-  - {fileID: 957216253}
-  platformSetB:
-  - {fileID: 1492157309}
 --- !u!1 &1515621193
 GameObject:
   m_ObjectHideFlags: 0

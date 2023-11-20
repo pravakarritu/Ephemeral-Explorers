@@ -9,6 +9,7 @@ public class PlatformController : MonoBehaviour
 
     private bool isVisibleA = true;
     private bool isVisibleB = false;
+    private bool pressV = false;
 
     void Start()
     {
@@ -28,8 +29,10 @@ public class PlatformController : MonoBehaviour
     void LateUpdate()
     {
         // When the player presses the V key, the platforms switch visibility
-        if (Input.GetKeyDown(KeyCode.V))
+        if (pressV)
         {
+            print("Late: isVisibleA: " + isVisibleA);
+            print("Late: isVisibleB: " + isVisibleB);
             foreach (GameObject platform in platformSetA)
             {
                 platform.SetActive(isVisibleA);
@@ -46,10 +49,14 @@ public class PlatformController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
+            print("before sVisibleA: " + isVisibleA);
+            print("before isVisibleB: " + isVisibleB);
             isVisibleA = !isVisibleA;
             isVisibleB = !isVisibleB;
             print("isVisibleA: " + isVisibleA);
             print("isVisibleB: " + isVisibleB);
+
+            pressV = true;
 
             // foreach (GameObject platform in platformSetA)
             // {
@@ -60,6 +67,9 @@ public class PlatformController : MonoBehaviour
             // {
             //     platform.SetActive(isVisibleB);
             // }
+        }
+        else {
+            pressV = false;
         }
     }
 }
