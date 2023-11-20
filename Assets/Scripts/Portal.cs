@@ -40,7 +40,7 @@ public class Portal : MonoBehaviour
                 exit_tag = "portal_5";
             }
             exit_portal = GameObject.FindWithTag(exit_tag);
-            collision.gameObject.transform.position = new Vector3(exit_portal.transform.position.x + 2, exit_portal.transform.position.y, 0);
+            collision.gameObject.transform.position = new Vector3(exit_portal.transform.position.x - 5, exit_portal.transform.position.y, 0);
         }
     }
 }

@@ -31,8 +31,6 @@ public class PlatformController : MonoBehaviour
         // When the player presses the V key, the platforms switch visibility
         if (pressV)
         {
-            print("Late: isVisibleA: " + isVisibleA);
-            print("Late: isVisibleB: " + isVisibleB);
             foreach (GameObject platform in platformSetA)
             {
                 platform.SetActive(isVisibleA);
@@ -49,12 +47,10 @@ public class PlatformController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            print("before sVisibleA: " + isVisibleA);
-            print("before isVisibleB: " + isVisibleB);
             isVisibleA = !isVisibleA;
             isVisibleB = !isVisibleB;
-            print("isVisibleA: " + isVisibleA);
-            print("isVisibleB: " + isVisibleB);
+            // print("isVisibleA: " + isVisibleA);
+            // print("isVisibleB: " + isVisibleB);
 
             pressV = true;
 
