@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 public class PlayerCtrElevator : MonoBehaviour
 {
     public Camera cam;
-    private Vector3 camDefaultPos;
+    private Vector3 camDefaultPos, elevatorDefaultPos;
     private float camDefaultSize, zoomingTime;
     private bool camZoomIn, camZoomStart;
     private float camZoomSize = 25.0f, zoomEndTime = 0.5f;
@@ -81,6 +81,7 @@ public class PlayerCtrElevator : MonoBehaviour
         // Find Elevator object
         elevator = GameObject.FindWithTag("Elevator");
         elevatorRBody = elevator.GetComponent<Rigidbody2D>();
+        elevatorDefaultPos = elevator.transform.position;
     }
 
     void FixedUpdate()
@@ -207,7 +208,8 @@ public class PlayerCtrElevator : MonoBehaviour
                 {
                     elevatorUpTime = 0;
                     elevatorFinish = true;
-                    elevatorRBody.velocity = new Vector3(0.0f, -3.0f);
+                    // elevatorRBody.velocity = new Vector3(0.0f, -3.0f);
+                    elevator.transform.position = elevatorDefaultPos;
                 }
             }
             else if (hit2.collider)
@@ -235,13 +237,14 @@ public class PlayerCtrElevator : MonoBehaviour
                 {
                     elevatorUpTime = 0;
                     elevatorFinish = true;
-                    elevatorRBody.velocity = new Vector3(0.0f, -3.0f);
+                    // elevatorRBody.velocity = new Vector3(0.0f, -3.0f);
+                    elevator.transform.position = elevatorDefaultPos;
                 }
             }
             else
             {
                 anim.SetBool("jump", true);
-                elevatorRBody.velocity = new Vector3(0.0f, -3.0f);
+                // elevatorRBody.velocity = new Vector3(0.0f, -3.0f);
             }
 
             rbody2D.velocity = new Vector3(xSpeed, ySpeed);
