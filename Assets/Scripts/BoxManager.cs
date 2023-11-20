@@ -85,7 +85,7 @@ public class BoxManager : MonoBehaviour
 
         
         // Check if user presses right shift key
-        bool rotate = Input.GetKeyDown(KeyCode.RightShift);
+        bool rotate = Input.GetKeyDown(KeyCode.R);
         // Rotate the box and player if user presses right shift key
         if (rotate)
         {

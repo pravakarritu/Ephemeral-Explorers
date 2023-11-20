@@ -64,7 +64,7 @@ public class PlayerCtrElevator : MonoBehaviour
         jumpTimeLimit = 0.3f;
         jumpFinish = true;
         elevatorUpTime = 0;
-        elevatorUpTimeLimit = 1.0f;
+        elevatorUpTimeLimit = 2.0f;
         elevatorFinish = true;
         numberOfJumpsSuccess = 0;
 
@@ -98,7 +98,7 @@ public class PlayerCtrElevator : MonoBehaviour
     void Update()
     {
         // Check if space bar is pressed
-        bool zoomInOut = Input.GetKeyDown(KeyCode.Space);
+        bool zoomInOut = Input.GetKeyDown(KeyCode.Z);
         if (zoomInOut)
         {
             // Zoom state is opposite of the current state
@@ -115,9 +115,9 @@ public class PlayerCtrElevator : MonoBehaviour
 
             // Get player movement input
             horizontalInput = Input.GetAxis("Horizontal");
-            bool isJump = Input.GetKey(KeyCode.UpArrow);
-            bool isJumpStart = Input.GetKeyDown(KeyCode.UpArrow);
-            bool isJumpFin = Input.GetKeyUp(KeyCode.UpArrow);
+            bool isJump = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space);
+            bool isJumpStart = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space);
+            bool isJumpFin = Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.Space);
 
             // Gradually increase/decrease the horizontal speed of the player
             xSpeed = horizontalInput * moveSpeed;
@@ -174,9 +174,15 @@ public class PlayerCtrElevator : MonoBehaviour
             }
 
             int layer_mask = LayerMask.GetMask(new string[] { "Default" });
-            RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position, -(Vector2)Vector3.up, 3.5f, layer_mask);
+            float w = GetComponent<SpriteRenderer>().bounds.size.x / 2;
+            Vector2 vec1 = new Vector2(transform.position.x - w, transform.position.y);
+            Vector2 vec2 = new Vector2(transform.position.x + w, transform.position.y);
+            RaycastHit2D hit1 = Physics2D.Raycast(vec1, -(Vector2)Vector3.up, 3.5f, layer_mask);
+            RaycastHit2D hit2 = Physics2D.Raycast(vec2, -(Vector2)Vector3.up, 3.5f, layer_mask);
+            // Debug.DrawRay(vec1, -(Vector2)Vector3.up * 3.5f, Color.red, 100.0f,false);
             // Debug.DrawRay((Vector2)transform.position, -(Vector2)Vector3.up * 3.5f, Color.red, 100.0f,false);
-            if (hit.collider)
+            // Debug.DrawRay((Vector2)transform.position, -(Vector2)Vector3.up * 3.5f, Color.red, 100.0f,false);
+            if (hit1.collider)
             {
                 if (jumpFinish)
                 {
@@ -187,7 +193,7 @@ public class PlayerCtrElevator : MonoBehaviour
                 moveSpeed = defaultSpeed;
                 anim.SetBool("jump", false);
 
-                if (hit.collider.CompareTag("Elevator") && elevatorUpTime < elevatorUpTimeLimit && elevatorFinish) {
+                if (hit1.collider.CompareTag("Elevator") && elevatorUpTime < elevatorUpTimeLimit && elevatorFinish) {
                     // elevator.transform.position += 50 * transform.up * Time.deltaTime;
                     elevatorUpTime += Time.deltaTime;
                     elevatorRBody.velocity = 10 * transform.up;
@@ -201,13 +207,41 @@ public class PlayerCtrElevator : MonoBehaviour
                 {
                     elevatorUpTime = 0;
                     elevatorFinish = true;
-                    elevatorRBody.velocity = new Vector3(0.0f, 0.0f);
+                    elevatorRBody.velocity = new Vector3(0.0f, -3.0f);
+                }
+            }
+            else if (hit2.collider)
+            {
+                if (jumpFinish)
+                {
+                    jumpTime = 0;
+                    jumpCount = 0;
+                    jumpFinish = false;
+                }
+                moveSpeed = defaultSpeed;
+                anim.SetBool("jump", false);
+
+                if (hit2.collider.CompareTag("Elevator") && elevatorUpTime < elevatorUpTimeLimit && elevatorFinish) {
+                    // elevator.transform.position += 50 * transform.up * Time.deltaTime;
+                    elevatorUpTime += Time.deltaTime;
+                    elevatorRBody.velocity = 10 * transform.up;
+                }
+                else if (elevatorUpTime > 0) {
+                    elevatorUpTime = elevatorUpTime - Time.deltaTime;
+                    elevatorFinish = false;
+                    elevatorRBody.velocity = -3 * transform.up;
+                }
+                else
+                {
+                    elevatorUpTime = 0;
+                    elevatorFinish = true;
+                    elevatorRBody.velocity = new Vector3(0.0f, -3.0f);
                 }
             }
             else
             {
                 anim.SetBool("jump", true);
-                elevatorRBody.velocity = new Vector3(0.0f, -1.0f);
+                elevatorRBody.velocity = new Vector3(0.0f, -3.0f);
             }
 
             rbody2D.velocity = new Vector3(xSpeed, ySpeed);

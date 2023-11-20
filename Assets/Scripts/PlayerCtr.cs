@@ -101,7 +101,7 @@ public class PlayerCtr : MonoBehaviour
 
 
         // Check if space bar is pressed
-        bool zoomInOut = Input.GetKeyDown(KeyCode.Space);
+        bool zoomInOut = Input.GetKeyDown(KeyCode.Z);
         if (zoomInOut)
         {
             // Zoom state is opposite of the current state
@@ -118,12 +118,11 @@ public class PlayerCtr : MonoBehaviour
 
             // Get player movement input
             horizontalInput = Input.GetAxis("Horizontal");
-            
 
             // Update for WASD
-            bool isJump = Input.GetKey(KeyCode.W);
-            bool isJumpStart = Input.GetKeyDown(KeyCode.W);
-            bool isJumpFin = Input.GetKeyUp(KeyCode.W);
+            bool isJump = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space);
+            bool isJumpStart = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space);
+            bool isJumpFin = Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.Space);
 
             // Gradually increase/decrease the horizontal speed of the player
             xSpeed = horizontalInput * moveSpeed;
@@ -181,9 +180,15 @@ public class PlayerCtr : MonoBehaviour
             }
 
             int layer_mask = LayerMask.GetMask(new string[] { "Default" });
-            RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position, -(Vector2)Vector3.up, 3.5f, layer_mask);
+            float w = GetComponent<SpriteRenderer>().bounds.size.x / 2;
+            Vector2 vec1 = new Vector2(transform.position.x - w, transform.position.y);
+            Vector2 vec2 = new Vector2(transform.position.x + w, transform.position.y);
+            RaycastHit2D hit1 = Physics2D.Raycast(vec1, -(Vector2)Vector3.up, 3.5f, layer_mask);
+            RaycastHit2D hit2 = Physics2D.Raycast(vec2, -(Vector2)Vector3.up, 3.5f, layer_mask);
+            // Debug.DrawRay(vec1, -(Vector2)Vector3.up * 3.5f, Color.red, 100.0f,false);
             // Debug.DrawRay((Vector2)transform.position, -(Vector2)Vector3.up * 3.5f, Color.red, 100.0f,false);
-            if (hit.collider)
+            // Debug.DrawRay((Vector2)transform.position, -(Vector2)Vector3.up * 3.5f, Color.red, 100.0f,false);
+            if (hit1.collider || hit2.collider)
             {
                 if (jumpFinish)
                 {

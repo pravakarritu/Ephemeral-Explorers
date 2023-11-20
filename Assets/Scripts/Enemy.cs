@@ -40,26 +40,23 @@ public class Enemy : MonoBehaviour
         // Debug.LogFormat("{0}", relativeY_fromBox);
         if(up && relativeY_fromBox < -0.7)
         {
-            Debug.LogFormat("up");
+            // Debug.LogFormat("up");
             transform.position += new Vector3(0.0f, Time.deltaTime*5, 0.0f);
         }
         else if (relativeY_fromBox >= -0.7)
         {
-            Debug.LogFormat("up = false");
+            // Debug.LogFormat("up = false");
             up = false;
             transform.position -= new Vector3(0.0f, Time.deltaTime*5, 0.0f);
         }
         else if (!up && relativeY_fromBox > originalDiff.y) {
-            Debug.LogFormat("down");
+            // Debug.LogFormat("down");
             transform.position -= new Vector3(0.0f, Time.deltaTime*5, 0.0f);
         }
         else if (!up && relativeY_fromBox <= originalDiff.y) {
-            Debug.LogFormat("up = true");
+            // Debug.LogFormat("up = true");
             transform.position = boxPos + originalDiff;
             up = true;
-        }
-        else {
-            Debug.LogFormat("else");
         }
     }
 
