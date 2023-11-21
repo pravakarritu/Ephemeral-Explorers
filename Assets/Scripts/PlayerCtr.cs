@@ -50,7 +50,7 @@ public class PlayerCtr : MonoBehaviour
 
 
     // JumpHigher when dinimishPower Use
-    public float enhancedJumpForce = 260; 
+    public float enhancedJumpForce = 260;
     private float originalJumpForce;
 
 
@@ -120,9 +120,9 @@ public class PlayerCtr : MonoBehaviour
             horizontalInput = Input.GetAxis("Horizontal");
 
             // Update for WASD
-            bool isJump = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space);
-            bool isJumpStart = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space);
-            bool isJumpFin = Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.Space);
+            bool isJump = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow);
+            bool isJumpStart = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow);
+            bool isJumpFin = Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.UpArrow);
 
             // Gradually increase/decrease the horizontal speed of the player
             xSpeed = horizontalInput * moveSpeed;
