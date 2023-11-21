@@ -5,14 +5,14 @@ using UnityEngine;
 public class ShowMenu : MonoBehaviour
 {
     private GameObject ExitButton, TutorialButton, PlayerControlsButton;
-    private bool isClicked = false;
+    private bool isClicked = true;
 
     void Start()
     {
         ExitButton = GameObject.Find("/Canvas/Exit");
         PlayerControlsButton = GameObject.Find("/Canvas/PlayerControls");
-        ExitButton.SetActive(false);
-        PlayerControlsButton.SetActive(false);
+        ExitButton.SetActive(true);
+        PlayerControlsButton.SetActive(true);
     }
 
     public void MenuSet()
