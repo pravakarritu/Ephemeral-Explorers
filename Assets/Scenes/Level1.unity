@@ -3217,6 +3217,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1779434628}
     m_Modifications:
+    - target: {fileID: 6969839633547748065, guid: 8512f24965f61465e8374078aa3724b6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b4b6ae530479241d8a24ab8a04785b4f, type: 3}
+    - target: {fileID: 6969839633547748065, guid: 8512f24965f61465e8374078aa3724b6, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6969839633547748075, guid: 8512f24965f61465e8374078aa3724b6, type: 3}
       propertyPath: m_Name
       value: enemy
