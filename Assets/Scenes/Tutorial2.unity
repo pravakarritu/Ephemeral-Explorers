@@ -1521,7 +1521,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press Z to control the player using
+  m_text: 'Z - Zoom
 
 
     WASD'
