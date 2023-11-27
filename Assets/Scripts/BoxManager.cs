@@ -69,9 +69,8 @@ public class BoxManager : MonoBehaviour
             // Get row and col of player
             int r_row = playerMapIndex / boxCol;
             int r_col = playerMapIndex - boxCol * r_row;
-           
 
-            // // Store brefore player position
+            // Store brefore player position
             Vector3 playerWorldPosition = player.transform.position;
             Transform playerParent = player.transform.parent;
             player.transform.parent = null;
@@ -83,6 +82,7 @@ public class BoxManager : MonoBehaviour
             player.transform.position = playerWorldPosition;
         }
 
+
         
         // Check if user presses right shift key
         bool rotate = Input.GetKeyDown(KeyCode.R);
@@ -93,10 +93,8 @@ public class BoxManager : MonoBehaviour
             int r_row = playerMapIndex / boxCol;
             int r_col = playerMapIndex - boxCol * r_row;
             // Rotate the box and player
-            box[boxMap[r_row][r_col]].transform.Rotate(Vector3.forward * 90);
+            box[boxMap[r_row][r_col]].transform.Rotate(Vector3.forward * -90);
             player.transform.Rotate(Vector3.forward * 90);
-
-            
         }
 
         // Box controls work only when we are zoomed out
