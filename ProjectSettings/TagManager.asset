@@ -18,6 +18,9 @@ TagManager:
   - enemy
   - Elevator
   - KeyGuards
+  - portal_2
+  - portal_1
+  - ClearPanelUI
   layers:
   - Default
   - TransparentFX
