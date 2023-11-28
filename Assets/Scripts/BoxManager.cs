@@ -82,7 +82,6 @@ public class BoxManager : MonoBehaviour
             player.transform.position = playerWorldPosition;
         }
 
-
         
         // Check if user presses right shift key
         bool rotate = Input.GetKeyDown(KeyCode.R);
@@ -228,7 +227,6 @@ public class BoxManager : MonoBehaviour
                 }
             }
         }
-
 
         // Get the x and y position of player
         float playerX = player.transform.position.x;
