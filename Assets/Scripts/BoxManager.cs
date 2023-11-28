@@ -11,7 +11,7 @@ public class BoxManager : MonoBehaviour
 {
     // Initialize the below values in unity editor
     public int boxNum, boxRow, boxCol, emptyBoxIndex;
-    public GameObject[] box, frame;
+    public GameObject[] box, arrow; //, frame
     private int[][] boxMap; // index: position index , value: index of box located at the position
 
     private GameObject player;
@@ -183,6 +183,49 @@ public class BoxManager : MonoBehaviour
                 }
                 emptyMapIndex += boxCol;
                 Debug.Log(++numberOfBoxMovements);
+            }
+
+            int next_row = emptyMapIndex / boxCol;
+            int next_col = emptyMapIndex - boxCol * row;
+            if (next_row == 0) {
+                if (next_col == 0) {
+                    arrow[0].SetActive(false);
+                    arrow[1].SetActive(true);
+                    arrow[2].SetActive(true);
+                    arrow[3].SetActive(false);
+                }
+                else if (next_col == boxCol - 1) {
+                    arrow[0].SetActive(false);
+                    arrow[1].SetActive(false);
+                    arrow[2].SetActive(true);
+                    arrow[3].SetActive(true);
+                }
+                else {
+                    arrow[0].SetActive(false);
+                    arrow[1].SetActive(true);
+                    arrow[2].SetActive(true);
+                    arrow[3].SetActive(true);
+                }
+            }
+            else if (next_row == boxRow - 1) {
+                if (next_col == 0) {
+                    arrow[0].SetActive(true);
+                    arrow[1].SetActive(true);
+                    arrow[2].SetActive(false);
+                    arrow[3].SetActive(false);
+                }
+                else if (next_col == boxCol - 1) {
+                    arrow[0].SetActive(true);
+                    arrow[1].SetActive(false);
+                    arrow[2].SetActive(false);
+                    arrow[3].SetActive(true);
+                }
+                else {
+                    arrow[0].SetActive(true);
+                    arrow[1].SetActive(true);
+                    arrow[2].SetActive(false);
+                    arrow[3].SetActive(true);
+                }
             }
         }
 
