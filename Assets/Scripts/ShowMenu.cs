@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class ShowMenu : MonoBehaviour
 {
-    private GameObject ExitButton, TutorialButton, PlayerControlsButton;
-    private bool isClicked = true;
+    private GameObject ExitButton, TutorialButton, PlayerControlsButton, TipsPanel;
+    private bool isClicked = false;
 
     void Start()
     {
         ExitButton = GameObject.Find("/Canvas/Exit");
         PlayerControlsButton = GameObject.Find("/Canvas/PlayerControls");
-        ExitButton.SetActive(true);
-        PlayerControlsButton.SetActive(true);
+        TipsPanel = GameObject.Find("/Canvas/TipsPanel");
+        ExitButton.SetActive(false);
+        if (PlayerControlsButton) PlayerControlsButton.SetActive(false);
+        if (TipsPanel) TipsPanel.SetActive(false);
     }
 
     public void MenuSet()
@@ -21,14 +23,16 @@ public class ShowMenu : MonoBehaviour
         {
             ExitButton.SetActive(false);
             // TutorialButton.SetActive(false);
-            PlayerControlsButton.SetActive(false);
+            if (PlayerControlsButton) PlayerControlsButton.SetActive(false);
+            if (TipsPanel)TipsPanel.SetActive(false);
             isClicked = false;
         }
         else
         {
             ExitButton.SetActive(true);
             // TutorialButton.SetActive(true);
-            PlayerControlsButton.SetActive(true);
+            if (PlayerControlsButton) PlayerControlsButton.SetActive(true);
+            if (TipsPanel)TipsPanel.SetActive(true);
             isClicked = true;
         }
     }
