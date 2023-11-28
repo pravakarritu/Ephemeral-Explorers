@@ -49,20 +49,8 @@ public class PlatformController : MonoBehaviour
         {
             isVisibleA = !isVisibleA;
             isVisibleB = !isVisibleB;
-            // print("isVisibleA: " + isVisibleA);
-            // print("isVisibleB: " + isVisibleB);
 
             pressV = true;
-
-            // foreach (GameObject platform in platformSetA)
-            // {
-            //     platform.SetActive(isVisibleA);
-            // }
-
-            // foreach (GameObject platform in platformSetB)
-            // {
-            //     platform.SetActive(isVisibleB);
-            // }
         }
         else {
             pressV = false;
