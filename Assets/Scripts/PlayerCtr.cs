@@ -328,22 +328,6 @@ public class PlayerCtr : MonoBehaviour
     }
 
 
-    // diminish size
-
-    // private void HandleDiminishPower(Collision2D other)
-    // {
-    //     if (other.gameObject.CompareTag("DiminishPower"))
-    //     {
-    //         diminishPowerGet = true;
-
-    //         Debug.Log("getPower");
-    //         transform.localScale = transform.localScale * 0.5f; // Reduce the player's size by half
-    //         Destroy(other.gameObject); // Destroy the power object
-    //     }
-    // }
-
-
-
     // Get keyGet value
     public bool GetKeyGet()
     {
