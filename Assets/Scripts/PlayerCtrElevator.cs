@@ -8,6 +8,7 @@ using UnityEngine.Networking;
 public class PlayerCtrElevator : MonoBehaviour
 {
     public Camera cam;
+    public GameObject mapCam;
     private Vector3 camDefaultPos, elevatorDefaultPos;
     private float camDefaultSize, zoomingTime;
     private bool camZoomIn, camZoomStart;
@@ -107,9 +108,13 @@ public class PlayerCtrElevator : MonoBehaviour
             zoomingTime = 0.0f;
             camZoomStart = true;
         }
+        if (!camZoomIn) {
+            mapCam.SetActive(false);
+        }
         // If the camera is zoomed in, then the player can move
         if (camZoomIn && camZoomStart)
         {
+            mapCam.SetActive(true);
             // Smoothly zoom in the camera
             zoomingTime += Time.deltaTime;
             anim.enabled = true;

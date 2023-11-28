@@ -8,6 +8,7 @@ using UnityEngine.Networking;
 public class PlayerCtr : MonoBehaviour
 {
     public Camera cam;
+    public GameObject mapCam;
     private Vector3 camDefaultPos;
     private float camDefaultSize, zoomingTime;
     private bool camZoomIn, camZoomStart;
@@ -98,8 +99,6 @@ public class PlayerCtr : MonoBehaviour
 
     void Update()
     {
-
-
         // Check if space bar is pressed
         bool zoomInOut = Input.GetKeyDown(KeyCode.Z);
         if (zoomInOut)
@@ -109,9 +108,13 @@ public class PlayerCtr : MonoBehaviour
             zoomingTime = 0.0f;
             camZoomStart = true;
         }
+        if (!camZoomIn) {
+            mapCam.SetActive(false);
+        }
         // If the camera is zoomed in, then the player can move
         if (camZoomIn && camZoomStart)
         {
+            mapCam.SetActive(true);
             // Smoothly zoom in the camera
             zoomingTime += Time.deltaTime;
             anim.enabled = true;
