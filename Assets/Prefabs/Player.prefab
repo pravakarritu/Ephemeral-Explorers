@@ -142,8 +142,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.00015965087
-      value: 0.50205964
+      time: -0.00016531296
+      value: 0.81228614
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   moveSpeed: 29
-  jumpForce: 110
+  jumpForce: 140
   defaultSpeed: 0
   gravity: 30
   numberOfJumpsSuccess: 0
