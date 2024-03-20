@@ -16,4 +16,4 @@ https://sanchishirur.github.io/Gold/
 
 Gold Video
 
-https://drive.google.com/drive/u/1/home
+https://drive.google.com/file/d/1CO3WaG8jvfUjux4UzFNkUafaEhbdfh8r/view?usp=sharing
