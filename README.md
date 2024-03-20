@@ -12,3 +12,8 @@ Playable Gold Build
 
 
 https://sanchishirur.github.io/Gold/
+
+
+Gold Video
+
+https://drive.google.com/drive/u/1/home
