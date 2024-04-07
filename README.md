@@ -1,3 +1,7 @@
+CSCI 526 - Advanced Mobile Devices and Game Consoles 
+
+Team Exploration - Team Development - Team Improvement
+
 Project Report 
 
 
