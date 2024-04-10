@@ -2,6 +2,22 @@ Coursework of CSCI 526 - Advanced Mobile Devices and Game Consoles
 
 Team Exploration - Team Development - Team Improvement
 
+
+Team Members
+
+| Name | Roles | E-mail |
+| :---         |     :---:      |          ---: |
+| Himanshu Rawlani   | Captain, System    | hrawlani@usc.edu    |
+| Adwait Raut     | User Interface      | anraut@usc.edu     |
+| Koya Kokubu   | GamePlay, System    | kokubu@usc.edu   |
+| Ritu Pravakar     | GamePlay, Stenographer       | pravakar@usc.edu      |
+| Sanchita Shirur   | System, Product Manager     | sshirur@usc.edu    |
+| Wenlong Hua    | User Interface, GamePlay       | wenlongh@usc.edu     |
+
+
+
+
+
 Project Report 
 
 
