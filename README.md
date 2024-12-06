@@ -2,7 +2,7 @@
 
 ## Team Members 
 
-![Screenshot from 2024-12-07 01-10-06](https://github.com/user-attachments/assets/ac8b79cd-92d7-4c65-93a1-06223cf0d8cb)
+![Screenshot from 2024-12-07 01-14-17](https://github.com/user-attachments/assets/2f190a23-e5b4-4b4f-addd-363d6a8b6637)
 
 ## Level Design
 
