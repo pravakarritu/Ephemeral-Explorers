@@ -36,6 +36,11 @@
 ![Screenshot from 2024-12-07 00-32-02](https://github.com/user-attachments/assets/b2ba9055-00b0-45c6-b61b-6a9d4c467b14)
 
 
+## Team Members and Game Builds 
+
+![Screenshot from 2024-12-07 01-00-21](https://github.com/user-attachments/assets/a47b6966-8dd0-4479-a762-0fb3d990af79)
+
+
 
 ## Evaluations of Section 1 and Section 2
 
