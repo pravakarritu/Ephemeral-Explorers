@@ -8,6 +8,11 @@
 
 ![Screenshot from 2024-12-07 01-11-57](https://github.com/user-attachments/assets/71ba8c8c-3587-4f37-908b-77a27f0608a9)
 
+## Presentation Video
+
+https://drive.google.com/file/d/1CO3WaG8jvfUjux4UzFNkUafaEhbdfh8r/view?usp=sharing
+
+
 ## Section 3: Alpha Prototype Progress Check Grade
 
 ![Screenshot from 2024-12-07 00-26-24](https://github.com/user-attachments/assets/8ea43c46-fe0f-4cb3-aa6c-147a28b43f98)
