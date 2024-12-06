@@ -4,6 +4,9 @@
 
 ![Screenshot from 2024-12-07 01-10-06](https://github.com/user-attachments/assets/ac8b79cd-92d7-4c65-93a1-06223cf0d8cb)
 
+## Level Design
+
+![Screenshot from 2024-12-07 01-11-57](https://github.com/user-attachments/assets/71ba8c8c-3587-4f37-908b-77a27f0608a9)
 
 ## Section 3: Alpha Prototype Progress Check Grade
 
