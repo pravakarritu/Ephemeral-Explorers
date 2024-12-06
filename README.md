@@ -1,5 +1,9 @@
 # Evaluations of CSCI 526: Advanced Mobile Games
 
+## Team Members 
+
+![Screenshot from 2024-12-07 01-10-06](https://github.com/user-attachments/assets/ac8b79cd-92d7-4c65-93a1-06223cf0d8cb)
+
 
 ## Section 3: Alpha Prototype Progress Check Grade
 
